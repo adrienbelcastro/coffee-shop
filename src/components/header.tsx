@@ -1,21 +1,24 @@
 import Image from "next/image";
-import logo from "../../assets/coffee-beans-logo-and-footer.svg";
+import logo from "../../public/assets/coffee-beans-logo-and-footer.svg";
 import Link from "../../node_modules/next/link";
 
-const header = () => {
+const Header = () => {
   return (
     <>
-      {" "}
-      <div className="w-full flex bg-rose-50 py-4 px-4">
+      <div className="w-full flex bg-rose-50 py-8 px-4">
         <div className="flex ml-2 mt-4 ">
           <div className="flex justify-between">
-            <Image className="h-auto max-w-full" src={logo} alt="Nitro Logo" />
+            <Image
+              className="h-auto max-w-[120px] min-w-[50px]"
+              src={logo}
+              alt="Nitro Logo"
+            />
 
             <h1 className="text-6xl font-extralight">nitro</h1>
             <ul className="flex items-end">
               <li>
                 <Link href="/about">
-                  <h3 className="px-5 text-xl">ABOUT</h3>
+                  <h3 className="px-5 text-xl">OUR STORY</h3>
                 </Link>
               </li>
               <li>
@@ -48,4 +51,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
