@@ -8,13 +8,17 @@ const Header = () => {
       <div className="w-full flex bg-rose-50 py-8 px-4">
         <div className="flex ml-2 mt-4 ">
           <div className="flex justify-between">
-            <Image
-              className="h-auto max-w-[120px] min-w-[50px]"
-              src={logo}
-              alt="Nitro Logo"
-            />
+            <Link href="/">
+              <div className="flex justify-between">
+                <Image
+                  className="h-auto max-w-[120px] min-w-[50px]"
+                  src={logo}
+                  alt="Nitro Logo"
+                />
 
-            <h1 className="text-6xl font-extralight">nitro</h1>
+                <h1 className="text-6xl font-extralight">nitro</h1>
+              </div>
+            </Link>
             <ul className="flex items-end">
               <li>
                 <Link href="/about">
