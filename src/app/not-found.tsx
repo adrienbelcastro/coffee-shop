@@ -1,6 +1,7 @@
 import React from "react";
 import Cup from "../../public/assets/coffeebeans-hero.png";
 import Image from "next/image";
+import Link from "../../node_modules/next/link";
 
 export default function Custom404() {
   return (
@@ -14,9 +15,11 @@ export default function Custom404() {
               It seems like something went wrong. Why don't we start over again,
               click the button to return home.
             </p>
-            <button className="mt-8 mb-10 px-10 py-4 bg-blue-400">
-              Return Home
-            </button>
+            <Link href="/">
+              <button className="mt-8 mb-10 px-10 py-4 bg-blue-400">
+                Return Home
+              </button>
+            </Link>
           </div>
           <Image src={Cup} alt="Cup" />
         </div>
