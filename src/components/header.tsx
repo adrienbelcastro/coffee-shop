@@ -31,19 +31,19 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/shop">
                   <h3 className="px-5 text-xl">SHOP NOW</h3>
                 </Link>
               </li>
             </ul>
             <ul className=" flex items-end">
               <li>
-                <Link href="/">
+                <Link href="/signup">
                   <h3 className="px-5 text-xl ">SIGN UP</h3>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/login">
                   <h3 className="px-5 text-xl">LOG IN</h3>
                 </Link>
               </li>
