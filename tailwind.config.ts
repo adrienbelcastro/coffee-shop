@@ -11,6 +11,13 @@ const config: Config = {
       sans: ['"Open Sans"', "sans-serif"],
     },
     extend: {
+      colors: {
+        graphite: "#393939",
+        white: "#fff",
+        nitroBlue: "#5bacc3",
+        lightGrey: "#f7f7f7",
+        nitroPink: "#fff0ed",
+      },
       backgroundImage: {
         hero_image: "url('../../public/assets/coffee-circle.jpg')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
