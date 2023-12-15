@@ -3,6 +3,7 @@ import beans from "../../public/assets/coffeebeans-hero.png";
 import Header from "@/components/Header";
 import Card from "@/components/card";
 import Footer from "@/components/footer";
+import Link from "../../node_modules/next/link";
 
 export default function Home() {
   return (
@@ -29,9 +30,11 @@ export default function Home() {
           <Card />
         </div>
         <div className="flex justify-center">
-          <button className="mt-8 mb-10 px-10 py-4 bg-blue-400">
-            VIEW ALL
-          </button>
+          <Link href="/shop">
+            <button className="mt-8 mb-10 px-10 py-4 bg-blue-400">
+              VIEW ALL
+            </button>
+          </Link>
         </div>
       </div>
       <div className="flex justify-center bg-white py-40">
