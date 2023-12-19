@@ -1,12 +1,13 @@
+import React from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/sidebar";
 
-export const page = () => {
+const Page: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="flex gap-12">
+      <div className="flex gap-12 bg-lightGrey">
         <div className="m-8">
           <Sidebar />
         </div>
@@ -52,4 +53,4 @@ export const page = () => {
   );
 };
 
-export default page;
+export default Page;
