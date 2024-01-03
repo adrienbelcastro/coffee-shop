@@ -5,8 +5,17 @@ import Image from "next/image";
 import beans from "../../../public/assets/coffeebeans-hero.png";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-const About = () => {
+interface ImageUrls {
+  imageURL: string;
+  imageURL2: string;
+  imageURL3: string;
+  imageURL4: string;
+  imageURL5: string;
+}
+
+const About: React.FC = () => {
   const [ref1, inView1] = useInView({
     triggerOnce: false,
     threshold: 0.5,
@@ -47,6 +56,52 @@ const About = () => {
     threshold: 0.5,
   });
 
+  const [imageUrls, setImageUrls] = useState<ImageUrls>({
+    imageURL: "",
+    imageURL2: "",
+    imageURL3: "",
+    imageURL4: "",
+    imageURL5: "",
+  });
+
+  async function getImageURL(): Promise<ImageUrls> {
+    try {
+      const res = await fetch(
+        "https://api.unsplash.com/search/photos?page=1&query=coffeeshop&client_id=iQqxDws2cffxFhuj31_rEqCyFhV0TtVcdpvxEHQqny8"
+      );
+
+      const data = await res.json();
+
+      return {
+        imageURL: data.results[1].urls.regular,
+
+        imageURL2: data.results[2].urls.regular,
+
+        imageURL3: data.results[3].urls.regular,
+
+        imageURL4: data.results[4].urls.regular,
+
+        imageURL5: data.results[5].urls.regular,
+      };
+    } catch (error) {
+      console.error("Error retrieving imageURL:", error);
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    console.log("useEffect triggered");
+    async function fetchImageUrls() {
+      try {
+        const data = await getImageURL();
+        setImageUrls(data);
+      } catch (error) {
+        console.error("Error fetching image URLs:", error);
+      }
+    }
+    fetchImageUrls();
+  }, []);
+
   return (
     <>
       <Header />
@@ -85,7 +140,14 @@ const About = () => {
             to the craft of coffee brewing.
           </p>
         </div>
-        <Image src={beans} alt="Coffee Beans" />
+        <div>
+          <Image
+            src={imageUrls.imageURL}
+            fill={true}
+            className="w-1/4"
+            alt="Coffee Beans"
+          />
+        </div>
       </motion.div>
 
       <motion.div
@@ -104,7 +166,7 @@ const About = () => {
             elevation of your coffee experience to new heights.
           </p>
         </div>
-        <Image src={beans} alt="Coffee Beans" />
+        <Image src={imageUrls.imageURL2} fill={true} alt="Coffee Beans" />
       </motion.div>
       <motion.div
         ref={ref5}
