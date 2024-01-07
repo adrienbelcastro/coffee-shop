@@ -5,7 +5,7 @@ import Card from "@/components/card";
 import Footer from "@/components/footer";
 import Link from "../../node_modules/next/link";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Header />
@@ -26,8 +26,6 @@ export default function Home() {
         <h2 className="py-20 text-6xl font-light text-center">Our Products</h2>
         <div className="flex justify-evenly">
           <Card />
-          <Card />
-          <Card />
         </div>
         <div className="flex justify-center">
           <Link href="/shop">
@@ -45,4 +43,6 @@ export default function Home() {
       <Footer />
     </>
   );
-}
+};
+
+export default Home;
