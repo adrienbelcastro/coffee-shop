@@ -10,8 +10,6 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       return new Response("Error fetching products", { status: 500 });
     }
 
-    console.log("Fetched products successfully:", data);
-
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error) {
     console.error("Unexpected error in the API route:", error);

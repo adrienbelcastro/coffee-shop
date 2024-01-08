@@ -1,6 +1,8 @@
 export const fetchData = async (endpoint: string) => {
   try {
-    const res = await fetch("http://localhost:3000/products");
+    const res = await fetch(`http://localhost:3000${endpoint}`);
+
+    console.log("Full API Response:", res);
 
     const data = await res.json();
 
@@ -8,9 +10,7 @@ export const fetchData = async (endpoint: string) => {
       throw new Error("Error getting data");
     }
 
-    return {
-      props: { data },
-    };
+    return data;
   } catch (error) {
     console.error("Error fetching data:", error.message);
 
