@@ -1,9 +1,28 @@
+"use client";
+
 import React from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/sidebar";
+import { fetchData } from "../../lib/dbRequests/getData";
+import { useEffect, useState } from "react";
 
 const Page: React.FC = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const result = await fetchData("/api/products");
+        setData(result || []);
+      } catch (error) {
+        console.error("Error fetching data on the client:", error.message);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  console.log(data);
   return (
     <>
       <Header />
@@ -17,34 +36,12 @@ const Page: React.FC = () => {
             Drinks
           </h3>
           <div className="grid grid-cols-2 gap-y-8 gap-x-64">
-            <div className="flex gap-4 items-center">
-              <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-              <h3>In-house Brew</h3>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-              <h3>Espresso</h3>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-              <h3>In-house Brew</h3>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-              <h3>In-house Brew</h3>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-              <h3>In-house Brew</h3>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-              <h3>In-house Brew</h3>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-              <h3>In-house Brew</h3>
-            </div>
+            {data.map((product) => (
+              <div className="flex gap-4 items-center">
+                <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
+                <h3>{product.name}</h3>
+              </div>
+            ))}
           </div>
         </div>
       </div>
