@@ -26,9 +26,21 @@ const Footer = () => {
         <div>
           <h3 className="text-3xl font-light">Social</h3>
           <div className="flex gap-2 pt-4">
-            <Image className="max-w-[120px] min-w-[50px]" src={facebook} />
-            <Image className="max-w-[120px] min-w-[50px]" src={instagram} />
-            <Image className="max-w-[120px] min-w-[50px]" src={yelp} />
+            <Image
+              className="max-w-[120px] min-w-[50px]"
+              src={facebook}
+              alt="Facebook Logo"
+            />
+            <Image
+              className="max-w-[120px] min-w-[50px]"
+              src={instagram}
+              alt="Instagram Logo"
+            />
+            <Image
+              className="max-w-[120px] min-w-[50px]"
+              src={yelp}
+              alt="Yelp Logo"
+            />
           </div>
         </div>
       </div>
