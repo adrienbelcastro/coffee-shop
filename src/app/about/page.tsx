@@ -51,17 +51,13 @@ const About: React.FC = () => {
     threshold: 0.5,
   });
 
-  const [ref8, inView8] = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
   const [imageUrls, setImageUrls] = useState<ImageUrls>({
     imageURL: "",
     imageURL2: "",
     imageURL3: "",
     imageURL4: "",
     imageURL5: "",
+    imageURL6: "",
   });
 
   async function getImageURL(): Promise<ImageUrls> {
@@ -82,6 +78,8 @@ const About: React.FC = () => {
         imageURL4: data.results[4].urls.regular,
 
         imageURL5: data.results[5].urls.regular,
+
+        imageURL6: data.results[6].urls.regular,
       };
     } catch (error) {
       console.error("Error retrieving imageURL:", error);
@@ -143,8 +141,10 @@ const About: React.FC = () => {
         <div>
           <Image
             src={imageUrls.imageURL}
-            fill={true}
-            className="w-1/4"
+            width={1600}
+            height={800}
+            style={{ objectFit: "cover" }}
+            className="max-w-[600px]"
             alt="Coffee Beans"
           />
         </div>
@@ -166,12 +166,19 @@ const About: React.FC = () => {
             elevation of your coffee experience to new heights.
           </p>
         </div>
-        <Image src={imageUrls.imageURL2} fill={true} alt="Coffee Beans" />
+        <Image
+          src={imageUrls.imageURL2}
+          width={1600}
+          height={800}
+          style={{ objectFit: "cover" }}
+          className="max-w-[600px]"
+          alt="Coffee Beans"
+        />
       </motion.div>
       <motion.div
-        ref={ref5}
+        ref={ref4}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: inView5 ? 1 : 0, y: inView5 ? 0 : 20 }}
+        animate={{ opacity: inView4 ? 1 : 0, y: inView4 ? 0 : 20 }}
         className="flex items-center justify-around py-8 px-4 h-screen bg-rose-50"
       >
         <div className="flex flex-col justify-center w-4/12">
@@ -187,12 +194,19 @@ const About: React.FC = () => {
             of craftsmanship and dedication.
           </p>
         </div>
-        <Image src={beans} alt="Coffee Beans" />
+        <Image
+          src={imageUrls.imageURL4}
+          width={1600}
+          height={800}
+          style={{ objectFit: "cover" }}
+          className="max-w-[600px] max-h-[400px]"
+          alt="Coffee Beans"
+        />
       </motion.div>
       <motion.div
-        ref={ref6}
+        ref={ref5}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: inView6 ? 1 : 0, y: inView6 ? 0 : 20 }}
+        animate={{ opacity: inView5 ? 1 : 0, y: inView5 ? 0 : 20 }}
         className="flex items-center justify-around py-8 px-4 h-screen bg-rose-50"
       >
         <div className="flex flex-col justify-center w-4/12">
@@ -205,12 +219,19 @@ const About: React.FC = () => {
             friends. We're not just a coffee shop; we're a home away from home.
           </p>
         </div>
-        <Image src={beans} alt="Coffee Beans" />
+        <Image
+          src={imageUrls.imageURL3}
+          width={1600}
+          height={800}
+          style={{ objectFit: "cover" }}
+          className="max-w-[600px]"
+          alt="Coffee Beans"
+        />
       </motion.div>
       <motion.div
-        ref={ref7}
+        ref={ref6}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: inView7 ? 1 : 0, y: inView7 ? 0 : 20 }}
+        animate={{ opacity: inView6 ? 1 : 0, y: inView6 ? 0 : 20 }}
         className="flex items-center justify-around py-8 px-4 h-screen bg-rose-50"
       >
         <div className="flex flex-col justify-center w-4/12">
@@ -222,12 +243,19 @@ const About: React.FC = () => {
             on both your coffee experience and the planet.
           </p>
         </div>
-        <Image src={beans} alt="Coffee Beans" />
+        <Image
+          src={imageUrls.imageURL5}
+          width={1600}
+          height={800}
+          style={{ objectFit: "cover" }}
+          className="max-w-[600px]"
+          alt="Coffee Beans"
+        />
       </motion.div>
       <motion.div
-        ref={ref8}
+        ref={ref7}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: inView8 ? 1 : 0, y: inView8 ? 0 : 20 }}
+        animate={{ opacity: inView7 ? 1 : 0, y: inView7 ? 0 : 20 }}
         className="flex items-center justify-around py-8 px-4 h-screen bg-rose-50"
       >
         <div className="flex flex-col justify-center w-4/12">
@@ -242,7 +270,14 @@ const About: React.FC = () => {
             community of coffee lovers.
           </p>
         </div>
-        <Image src={beans} alt="Coffee Beans" />
+        <Image
+          src={imageUrls.imageURL6}
+          width={1600}
+          height={800}
+          style={{ objectFit: "cover" }}
+          className="max-w-[600px]"
+          alt="Coffee Beans"
+        />
       </motion.div>
       <Footer />
     </>
