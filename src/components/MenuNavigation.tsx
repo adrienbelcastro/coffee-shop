@@ -26,13 +26,8 @@ const MenuNavigation: React.FC = () => {
       selectedFilter === "all"
         ? menuData
         : menuData.filter((item) => {
-            console.log("Item:", item); // Log the item to see its structure
-            console.log("Category ID:", item.category_id); // Log category_id for each item
-            console.log("Selected Filter:", selectedFilter); // Log the selected filter
             return item.filters === selectedFilter;
           });
-
-    console.log("Filtered Items:", filteredItems);
 
     setDisplayedMenuItems(filteredItems);
   }, [selectedFilter, menuData]);
@@ -41,43 +36,45 @@ const MenuNavigation: React.FC = () => {
     setSelectedFilter(filter);
   };
 
+  console.log(displayedMenuItems);
+
   return (
     <>
       <div className="bg-black flex justify-center gap-4 py-4">
         <button
           onClick={() => filterData("Hot Drinks")}
-          className="text-white border-x-2 px-4 active:border-b-2 border-blue-300"
+          className="text-white border-x-2 px-4 focus:text-blue-300"
         >
           HOT DRINKS
         </button>
         <button
           onClick={() => filterData("Cold Drinks")}
-          className="text-white border-r-2 pr-4"
+          className="text-white border-r-2 pr-4 focus:text-blue-300"
         >
           COLD DRINKS
         </button>
         <button
           onClick={() => filterData("Pastries")}
-          className="text-white border-r-2 pr-4"
+          className="text-white border-r-2 pr-4 focus:text-blue-300"
         >
           PASTRIES
         </button>
         <button
           onClick={() => filterData("Lunch & Dinner")}
-          className="text-white border-r-2 pr-4"
+          className="text-white border-r-2 pr-4 focus:text-blue-300"
         >
           LUNCH & DINNER
         </button>
         <button
           onClick={() => filterData("Breakfast")}
-          className="text-white border-r-2 pr-4"
+          className="text-white border-r-2 pr-4 focus:text-blue-300"
         >
           BREAKFAST
         </button>
       </div>
       <div className="py-8">
         <h1 className="text-6xl  text-center font-light">
-          {displayedMenuItems.filters}
+          {displayedMenuItems[0].filters}
         </h1>
         <div className="flex justify-center py-8 flex-col">
           {displayedMenuItems.map((item, index) => (
