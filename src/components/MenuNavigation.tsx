@@ -73,18 +73,25 @@ const MenuNavigation: React.FC = () => {
         </button>
       </div>
       <div className="py-8">
-        <h1 className="text-6xl  text-center font-light">
-          {displayedMenuItems[0].filters}
-        </h1>
-        <div className="flex justify-center py-8 flex-col">
-          {displayedMenuItems.map((item, index) => (
-            <div key={index} className="flex items-center flex-col">
-              <h3 className="text-center text-3xl font-light">{item.name}</h3>
-              <p className="w-2/5 text-center pt-2">{item.description}</p>
-              <p className="w-2/5 text-center pt-2">${item.price}</p>
+        {displayedMenuItems.length > 0 ? (
+          <>
+            <h1 className="text-6xl  text-center font-light">
+              {displayedMenuItems[0].filters}
+            </h1>
+            <div className="flex justify-center py-8 flex-col">
+              {displayedMenuItems.map((item, index) => (
+                <div key={index} className="flex items-center flex-col">
+                  <h3 className="text-center text-3xl font-light">
+                    {item.name}
+                  </h3>
+                  <p className="w-2/5 text-center pt-2">{item.description}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        ) : (
+          <p className="text-3xl text-center font-light">No items found</p>
+        )}
       </div>
     </>
   );
