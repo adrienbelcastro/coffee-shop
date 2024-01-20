@@ -4,7 +4,6 @@ import React from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/Header";
 import Sidebar from "@/components/sidebar";
-import { fetchData } from "../../lib/dbRequests/getData";
 import { useEffect, useState } from "react";
 import Link from "../../../node_modules/next/link";
 
