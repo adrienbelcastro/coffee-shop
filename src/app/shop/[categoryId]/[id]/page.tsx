@@ -32,7 +32,6 @@ const page = () => {
     }
   }, [categoryId]);
 
-  console.log(data[0]);
   return (
     <>
       <Header />
@@ -61,7 +60,7 @@ const page = () => {
           </div>
         </div>
         <div className="w-[35%]">
-          <ProductOptions />
+          <ProductOptions options={data} />
         </div>
       </div>
       <Footer />
