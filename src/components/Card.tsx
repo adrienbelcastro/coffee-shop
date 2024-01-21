@@ -21,6 +21,8 @@ const Card = () => {
 
   const itemShowcase = data.slice(0, 3);
 
+  console.log(data);
+
   return (
     <>
       {itemShowcase.map((product) => (
@@ -32,7 +34,6 @@ const Card = () => {
           />
           <div className="flex justify-around py-8 bg-rose-50  ">
             <h2>{product.name}</h2>
-            <h2>${product.price}</h2>
           </div>
         </div>
       ))}
