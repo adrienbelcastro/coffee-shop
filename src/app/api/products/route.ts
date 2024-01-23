@@ -7,7 +7,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     const { data, error } = await supabase
       .from("products")
       .select(
-        `product_id, name,description,category_id,filters, prices(price)`
+        "product_id, name,description,category_id, filters, prices(price)"
       );
 
     if (error) {
