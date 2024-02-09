@@ -36,18 +36,6 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
-            <ul className=" flex items-end">
-              <li>
-                <Link href="/signup">
-                  <h3 className="px-5 text-xl ">SIGN UP</h3>
-                </Link>
-              </li>
-              <li>
-                <Link href="/login">
-                  <h3 className="px-5 text-xl">LOG IN</h3>
-                </Link>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
