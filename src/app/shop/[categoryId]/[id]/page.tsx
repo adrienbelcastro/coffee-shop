@@ -35,12 +35,10 @@ const page = () => {
   return (
     <>
       <Header />
-      {data.length > 0 && (
-        <div className="mt-16 py-16 flex flex-col justify-center items-center gap-8  bg-rose-50 h-max">
-          <h1 className="text-6xl font-light">{data[0].name}</h1>
-          <p>{data[0].description}</p>
-        </div>
-      )}
+      <div className="mt-16 py-16 flex flex-col justify-center items-center gap-8  bg-rose-50 h-max">
+        <h1 className="text-6xl font-light">{data.product_name}</h1>
+        <p>{data.product_description}</p>
+      </div>
       <div className=" flex justify-center  gap-44 mt-8 h-[500px] max-h-[500px] max-w-[150px">
         <div className="w-[35%]">
           <h3 className="text-3xl border-b-4 pb-4">Size Options</h3>
