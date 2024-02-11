@@ -80,7 +80,7 @@ const MenuNavigation: React.FC = () => {
             </h1>
             <div className="flex justify-center py-8 flex-col">
               {displayedMenuItems.map((item, index) => (
-                <div key={index} className="flex items-center flex-col">
+                <div key={index} className="flex items-center flex-col py-4">
                   <h3 className="text-center text-3xl font-light">
                     {item.name}
                   </h3>
