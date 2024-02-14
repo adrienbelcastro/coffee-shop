@@ -37,9 +37,9 @@ const page = () => {
   return (
     <>
       <Header />
-      <div className="mt-16 py-16 flex flex-col justify-center items-center gap-8  bg-rose-50 h-max">
+      <div className="mt-16 py-16 flex flex-col justify-center items-center gap-8  bg-rose-50 h-max ">
         <h1 className="text-6xl font-light">{data.product?.name}</h1>
-        <p>{data.product?.description}</p>
+        <p className="text-center w-[50%]">{data.product?.description}</p>
       </div>
       <div className=" flex justify-center  gap-44 mt-8 h-[500px] max-h-[500px] max-w-[150px">
         <div className="w-[35%]">

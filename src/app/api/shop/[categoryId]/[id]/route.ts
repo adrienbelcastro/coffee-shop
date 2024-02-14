@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { initSupabase } from "../../../../../lib/supabase/supabaseClient";
+import { NextResponse } from "next/server";
 
 interface Product {
   productId: number;
@@ -7,10 +8,24 @@ interface Product {
   description: string;
 }
 
-interface CustomizationOption {
-  id: number;
-  name: string;
-  category: string;
+interface ProductOptions {
+  product_id: number;
+  option_id: number;
+}
+
+interface Option {
+  option_id: number;
+  option_name: string;
+  description: string;
+}
+
+interface Choice {
+  choice_id: number;
+  choice_name: string;
+}
+
+interface Price {
+  price: number;
 }
 
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -24,58 +39,83 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     const supabase = initSupabase();
     const { data: productData, error: productError } = await supabase
       .from<Product>("products")
-      .select("*")
+      .select("product_id, name, description")
       .eq("product_id", parseInt(productId))
       .single();
 
-    const { data: prices, error: pricesError } = await supabase
-      .from("prices")
-      .select("*")
-      .eq("product_id", productId);
+    const { data: optionData, error: optionsError } = await supabase
+      .from<Option>("options")
+      .select("*");
 
-    const { data: sizes, error: sizesError } = await supabase
-      .from("sizes")
-      .select("*")
-      .eq("product_id", productId);
+    const { data: productOptionsData, error: productOptionsError } =
+      await supabase
+        .from<ProductOptions>("product_options")
+        .select("*")
+        .eq("product_id", parseInt(productId));
 
-    const { data: customizationOptions, error: optionsError } = await supabase
-      .from("product_customization_options")
-      .select("*")
-      .eq("product_id", productId);
-
-    if (productError || pricesError || sizesError || optionsError) {
-      console.error(
-        "Error fetching products:",
-        productError || pricesError || sizesError || optionsError
-      );
+    if (productError || optionsError || productOptionsError) {
+      console.error("Error fetching products:", productError || optionsError);
       return new Response("Error fetching products", { status: 500 });
     }
 
-    const groupedCustomizationOptions = customizationOptions.reduce(
-      (
-        acc: { [category: string]: CustomizationOption[] },
-        option: CustomizationOption
-      ) => {
-        if (!acc[option.category]) {
-          acc[option.category] = [];
+    const optionsWithChoice = await Promise.all(
+      productOptionsData.map(async (productOption) => {
+        const option = optionData.find(
+          (opt) => opt.option_id === productOption.option_id
+        );
+
+        if (!option) {
+          console.error(`Option with ID ${productOption.option_id} not found`);
+          return null;
         }
-        acc[option.category].push(option);
-        return acc;
-      },
-      {}
+
+        const { data: choices, error: choicesError } = await supabase
+          .from<Choice>("options_choices")
+          .select("choice_id, choice_name")
+          .eq("option_id", option.option_id);
+
+        if (choicesError) {
+          console.error("Error fetching choices:", choicesError);
+          return [];
+        }
+
+        const choicesWithPrices = await Promise.all(
+          choices.map(async (choice) => {
+            console.log("Processing Choice:", choice); // Log each choice
+            const { data: prices, error: pricesError } = await supabase
+              .from<Price>("prices")
+              .select("price")
+              .eq("option_id", option.option_id)
+              .eq("choice_id", choice.choice_id)
+              .eq("product_id", productId);
+
+            if (pricesError) {
+              console.error("Error fetching prices:", pricesError);
+              return [];
+            }
+
+            return {
+              ...choice,
+              prices,
+            };
+          })
+        );
+
+        return {
+          ...option,
+          choices: choicesWithPrices,
+        };
+      })
     );
 
-    console.log(groupedCustomizationOptions);
+    console.log(optionsWithChoice);
 
-    return new Response(
-      JSON.stringify({
-        product: productData,
-        prices,
-        sizes,
-        customizationOptions: groupedCustomizationOptions,
-      }),
-      { status: 200 }
-    );
+    const responseData = {
+      product: productData,
+      options: optionsWithChoice,
+    };
+
+    return NextResponse.json(responseData, { status: 200 });
   } catch (error) {
     console.error(`Error fetching product details`, error);
     return new Response("Internal Server Error", { status: 500 });
