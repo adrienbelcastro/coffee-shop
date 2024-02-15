@@ -16,7 +16,9 @@ const Home = () => {
             Coffee is a brewed drink prepared from roasted coffee beans, the
             seeds of berries from certain Coffee species
           </p>
-          <button className="mt-6 p-4 bg-blue-400">SHOP NOW</button>
+          <Link href="/menu">
+            <button className="mt-6 p-4 bg-blue-400">SHOP NOW</button>
+          </Link>
         </div>
         <div className="py-8">
           <Image src={beans} alt="Coffee Beans" />
