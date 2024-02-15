@@ -39,7 +39,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     const supabase = initSupabase();
     const { data: productData, error: productError } = await supabase
       .from<Product>("products")
-      .select("product_id, name, description")
+      .select("product_id, name, description, sizes_needed")
       .eq("product_id", parseInt(productId))
       .single();
 
