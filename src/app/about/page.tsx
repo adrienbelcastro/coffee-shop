@@ -2,7 +2,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/footer";
 import Image from "next/image";
-import beans from "../../../public/assets/coffeebeans-hero.png";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -13,6 +12,7 @@ interface ImageUrls {
   imageURL3: string;
   imageURL4: string;
   imageURL5: string;
+  imageUrl6: string;
 }
 
 const About: React.FC = () => {
