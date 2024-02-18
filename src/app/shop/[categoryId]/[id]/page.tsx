@@ -30,8 +30,6 @@ const page = () => {
     }
   }, [categoryId, id]);
 
-  console.log(data);
-
   return (
     <>
       <Header />
