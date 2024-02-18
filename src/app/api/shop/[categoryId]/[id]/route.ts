@@ -28,7 +28,10 @@ interface Price {
   price: number;
 }
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (
+  req: NextApiRequest,
+  res: NextApiResponse<ProductDataResponse | ErrorResponse>
+) => {
   try {
     const productId = res.params.id;
 
@@ -59,9 +62,9 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const optionsWithChoice = await Promise.all(
-      productOptionsData.map(async (productOption) => {
+      productOptionsData.map(async (productOption: ProductOptions) => {
         const option = optionData.find(
-          (opt) => opt.option_id === productOption.option_id
+          (opt: Option) => opt.option_id === productOption.option_id
         );
 
         if (!option) {
@@ -80,8 +83,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         const choicesWithPrices = await Promise.all(
-          choices.map(async (choice) => {
-            console.log("Processing Choice:", choice); // Log each choice
+          choices.map(async (choice: Choice) => {
             const { data: prices, error: pricesError } = await supabase
               .from<Price>("prices")
               .select("price")
@@ -108,9 +110,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
       })
     );
 
-    console.log(optionsWithChoice);
-
-    const responseData = {
+    const responseData: ProductDataResponse = {
       product: productData,
       options: optionsWithChoice,
     };
@@ -121,3 +121,20 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     return new Response("Internal Server Error", { status: 500 });
   }
 };
+
+interface ProductDataResponse {
+  product: Product;
+  options: OptionWithChoices[];
+}
+
+interface OptionWithChoices extends Option {
+  choices: ChoiceWithPrices[];
+}
+
+interface ChoiceWithPrices extends Choice {
+  prices: Price[];
+}
+
+interface ErrorResponse {
+  error: string;
+}
