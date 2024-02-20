@@ -3,7 +3,6 @@
 import React from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/Header";
-import Sidebar from "@/components/sidebar";
 import { useEffect, useState } from "react";
 import Link from "../../../node_modules/next/link";
 
@@ -26,12 +25,9 @@ const Page: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="flex gap-12 bg-lightGrey">
-        <div className="m-8">
-          <Sidebar />
-        </div>
+      <div className="flex justify-center items-center bg-lightGrey">
         <div className="m-8 ">
-          <h3 className="text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
+          <h3 className="text-3xl text-center font-light mx-0 my-4 py-4  border-b-2 border-black">
             Menu
           </h3>
           <div className="grid grid-cols-2 gap-y-8 gap-x-64">
