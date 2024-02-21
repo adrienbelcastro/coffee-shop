@@ -1,38 +1,32 @@
-"use client";
-
 import React from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/Header";
-import { useEffect, useState } from "react";
 import Link from "../../../node_modules/next/link";
 
-const Page: React.FC = () => {
-  const [data, setData] = useState([]);
+export async function getData() {
+  const result = await fetch("http://localhost:3000/api/shop");
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const result = await fetch("http://localhost:3000/api/shop");
-        const data = await result.json();
-        setData(data || []);
-      } catch (error) {
-        console.error("Error fetching data on the client:", error.message);
-      }
-    };
-    fetchProducts();
-  }, []);
+  if (!result) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return result.json();
+}
+
+export default async function Page() {
+  const data = await getData();
 
   return (
     <>
       <Header />
-      <div className="flex justify-center items-center bg-lightGrey">
+      <div className="h-[518px] flex justify-center items-center bg-lightGrey">
         <div className="m-8 ">
           <h3 className="text-3xl text-center font-light mx-0 my-4 py-4  border-b-2 border-black">
             Menu
           </h3>
           <div className="grid grid-cols-2 gap-y-8 gap-x-64">
             {data.map((product) => (
-              <Link href={`/shop/${product.id}`}>
+              <Link key={product.id} href={`/shop/${product.id}`}>
                 <div className="flex gap-4 items-center">
                   <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
                   <h3>{product.name}</h3>
@@ -45,6 +39,4 @@ const Page: React.FC = () => {
       <Footer />
     </>
   );
-};
-
-export default Page;
+}
