@@ -1,41 +1,54 @@
-"use client";
-
 import React from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/Header";
-import Sidebar from "@/components/sidebar";
-import { useEffect, useState } from "react";
-import { useParams } from "../../../../node_modules/next/navigation";
 import Link from "../../../../node_modules/next/link";
 
-const Page: React.FC = () => {
-  const [data, setData] = useState([]);
-  const { categoryId } = useParams();
+type Product = {
+  product_id: number;
+  name: string;
+};
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const result = await fetch(
-          `http://localhost:3000/api/shop/${categoryId}`
-        );
-        const data = await result.json();
-        setData(data || []);
-      } catch (error) {
-        console.error("Error fetching data on the client:", error.message);
-      }
-    };
-    if (categoryId) {
-      fetchProducts();
-    }
-  }, [categoryId]);
+type Props = {
+  categoryId: number;
+  products: Product[];
+};
+
+export async function fetchProducts({
+  categoryId,
+  slug,
+}: {
+  categoryId: number;
+  slug?: string;
+}) {
+  const result = await fetch(`http://localhost:3000/api/shop/${categoryId}`);
+
+  if (!result) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return result.json();
+}
+
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params?: { categoryId: number; slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
+  if (!params) {
+    // Handle the case where params is undefined
+    return <div>Loading...</div>;
+  }
+
+  const { categoryId } = params;
+  const data = await fetchProducts({ categoryId, slug: searchParams?.slug });
 
   return (
     <>
       <Header />
-      <div className="flex gap-12 bg-lightGrey">
-        <div className="m-8">
-          <Sidebar />
-        </div>
+      <div className="flex justify-center items-center bg-lightGrey">
+        <div className="m-8"></div>
         <div className="m-8 ">
           <h3 className="text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
             Menu
@@ -56,6 +69,4 @@ const Page: React.FC = () => {
       <Footer />
     </>
   );
-};
-
-export default Page;
+}
