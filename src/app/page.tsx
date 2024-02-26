@@ -2,7 +2,7 @@ import Image from "next/image";
 import beans from "../../public/assets/coffeebeans-hero.png";
 import Header from "@/components/Header";
 import Card from "@/components/card";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer";
 import Link from "../../node_modules/next/link";
 
 const Home = () => {
