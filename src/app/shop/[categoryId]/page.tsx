@@ -47,10 +47,9 @@ export default async function Page({
   return (
     <>
       <Header />
-      <div className="flex justify-center items-center bg-lightGrey">
-        <div className="m-8"></div>
+      <div className="flex justify-center  bg-lightGrey h-[518px]">
         <div className="m-8 ">
-          <h3 className="text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
+          <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
             Menu
           </h3>
 
