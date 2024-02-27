@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,7 +7,7 @@ import { useParams } from "../../../../../node_modules/next/navigation";
 import ProductOptions from "@/components/ProductOptions";
 import SizeSelector from "@/components/SizeSelector";
 
-const page = () => {
+const Page = () => {
   const [data, setData] = useState([]);
   const { categoryId } = useParams();
   const { id } = useParams();
@@ -53,4 +52,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
