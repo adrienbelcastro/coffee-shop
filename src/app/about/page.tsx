@@ -1,6 +1,6 @@
 "use client";
 import Header from "@/components/Header";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
