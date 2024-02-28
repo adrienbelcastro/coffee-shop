@@ -114,11 +114,11 @@ const About: React.FC = () => {
           Welcome to Nitro! Where Coffee Meets Elevation
         </h1>
         <p className="w-6/12 pt-4 text-center">
-          At Nitro, we believe that coffee is more than just a beverage; it's an
+          {`At Nitro, we believe that coffee is more than just a beverage; it's an
           experience. Nestled in the heart of Toronto, Nitro is not just a
           coffee shop — it's a haven for coffee enthusiasts, a place where the
           rich aroma of freshly brewed coffee blends seamlessly with the warm
-          ambiance to create an inviting space for all.
+          ambiance to create an inviting space for all.`}
         </p>
       </motion.div>
 
@@ -131,11 +131,11 @@ const About: React.FC = () => {
         <div className="flex flex-col justify-center w-4/12">
           <h1 className="text-3xl pb-4 font-light pl-8">Our Story</h1>
           <p className=" pl-8 pr-2">
-            Nitro was born out of a passion for exceptional coffee and a desire
+            {`Nitro was born out of a passion for exceptional coffee and a desire
             to create a community hub where people could gather, connect, and
             savor the simple pleasures of life. Founded in 2013, our journey
             began with a commitment to quality, sustainability, and a dedication
-            to the craft of coffee brewing.
+            to the craft of coffee brewing.`}
           </p>
         </div>
         <div>
@@ -159,11 +159,11 @@ const About: React.FC = () => {
         <div className="flex flex-col justify-center w-4/12">
           <h1 className="text-3xl pb-4 font-light">The Nitro Difference</h1>
           <p>
-            What sets Nitro apart is our dedication to serving nitrogen-infused
+            {`What sets Nitro apart is our dedication to serving nitrogen-infused
             coffee, a game-changer that transforms your coffee experience.
             Imagine a velvety-smooth, cascading pour that tantalizes your taste
             buds with every sip. Nitro coffee isn't just a drink; it's an
-            elevation of your coffee experience to new heights.
+            elevation of your coffee experience to new heights.`}
           </p>
         </div>
         <Image
@@ -186,12 +186,12 @@ const About: React.FC = () => {
             Craftsmanship in Every Cup
           </h1>
           <p>
-            We source only the finest beans from sustainable and ethical coffee
+            {`We source only the finest beans from sustainable and ethical coffee
             farms around the world. Our skilled baristas meticulously roast and
             grind these beans in-house to ensure that every cup of Nitro coffee
             is a masterpiece. Whether you prefer a classic espresso, a creamy
             latte, or the signature Nitro cold brew, each sip is a celebration
-            of craftsmanship and dedication.
+            of craftsmanship and dedication.`}
           </p>
         </div>
         <Image
@@ -212,11 +212,11 @@ const About: React.FC = () => {
         <div className="flex flex-col justify-center w-4/12">
           <h1 className="text-3xl pb-4 font-light">Community and Connection</h1>
           <p>
-            At Nitro, we believe that a coffee shop is more than just a place to
+            {`At Nitro, we believe that a coffee shop is more than just a place to
             grab a cup on the go; it's a gathering spot for the community. Our
             cozy seating, free Wi-Fi, and warm ambiance make Nitro the perfect
             place for work meetings, study sessions, or catching up with
-            friends. We're not just a coffee shop; we're a home away from home.
+            friends. We're not just a coffee shop; we're a home away from home.`}
           </p>
         </div>
         <Image
@@ -237,10 +237,10 @@ const About: React.FC = () => {
         <div className="flex flex-col justify-center w-4/12">
           <h1 className="text-3xl pb-4 font-light">Sustainability Matters</h1>
           <p>
-            We are committed to sustainability and minimizing our environmental
+            {`We are committed to sustainability and minimizing our environmental
             footprint. From using compostable cups to sourcing coffee beans from
             eco-friendly farms, Nitro is dedicated to making a positive impact
-            on both your coffee experience and the planet.
+            on both your coffee experience and the planet.`}
           </p>
         </div>
         <Image
@@ -263,11 +263,11 @@ const About: React.FC = () => {
             Join Us on the Nitro Journey
           </h1>
           <p>
-            Whether you're a coffee connoisseur or just looking for a welcoming
+            {`Whether you're a coffee connoisseur or just looking for a welcoming
             place to unwind, Nitro invites you to join us on a journey of
             flavor, community, and connection. Experience the difference that
             Nitro-infused coffee can make and become a part of our growing
-            community of coffee lovers.
+            community of coffee lovers.`}
           </p>
         </div>
         <Image
