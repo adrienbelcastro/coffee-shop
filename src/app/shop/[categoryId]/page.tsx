@@ -55,7 +55,10 @@ export default async function Page({
 
           <div className="grid grid-cols-2 gap-y-8 gap-x-64">
             {data.map((product) => (
-              <Link href={`/shop/${categoryId}/${product.product_id}`}>
+              <Link
+                key={product.product_id}
+                href={`/shop/${categoryId}/${product.product_id}`}
+              >
                 <div className="flex gap-4 items-center">
                   <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
                   <h3>{product.name}</h3>
