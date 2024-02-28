@@ -1,6 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { initSupabase } from "../../../../../lib/supabase/supabaseClient";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 interface Product {
   productId: number;
@@ -29,8 +28,8 @@ interface Price {
 }
 
 export const GET = async (
-  req: NextApiRequest,
-  res: NextApiResponse<ProductDataResponse | ErrorResponse>
+  req: NextRequest,
+  res: NextResponse<ProductDataResponse | ErrorResponse>
 ) => {
   try {
     const productId = res.params.id;

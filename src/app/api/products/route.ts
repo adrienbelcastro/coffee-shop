@@ -1,7 +1,6 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { initSupabase } from "../../../lib/supabase/supabaseClient";
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (req: Request, res: Response) => {
   try {
     const supabase = initSupabase();
     const { data, error } = await supabase
