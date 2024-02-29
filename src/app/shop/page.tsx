@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Link from "../../../node_modules/next/link";
 
-export async function getData() {
+async function getData() {
   const result = await fetch("http://localhost:3000/api/shop");
 
   if (!result) {
