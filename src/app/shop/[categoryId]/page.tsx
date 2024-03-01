@@ -13,7 +13,7 @@ type Props = {
   products: Product[];
 };
 
-export async function fetchProducts({
+async function fetchProducts({
   categoryId,
   slug,
 }: {
