@@ -270,14 +270,18 @@ const About: React.FC = () => {
             community of coffee lovers.`}
           </p>
         </div>
-        <Image
-          src={imageUrls.imageURL6 || <div>Loading...</div>}
-          width={1600}
-          height={800}
-          style={{ objectFit: "cover" }}
-          className="max-w-[600px]"
-          alt="Coffee Beans"
-        />
+        {!imageUrls.imageURL6 ? (
+          <div>Loading...</div>
+        ) : (
+          <Image
+            src={imageUrls.imageURL6}
+            width={1600}
+            height={800}
+            style={{ objectFit: "cover" }}
+            className="max-w-[600px]"
+            alt="Coffee Beans"
+          />
+        )}
       </motion.div>
       <Footer />
     </>
