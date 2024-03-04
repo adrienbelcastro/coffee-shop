@@ -12,7 +12,7 @@ interface ImageUrls {
   imageURL3: string;
   imageURL4: string;
   imageURL5: string;
-  imageURL6?: string;
+  imageURL6: string;
 }
 
 const About: React.FC = () => {
