@@ -93,6 +93,7 @@ const About: React.FC = () => {
       try {
         const data = await getImageURL();
         setImageUrls(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching image URLs:", error);
       }
@@ -270,7 +271,7 @@ const About: React.FC = () => {
             community of coffee lovers.`}
           </p>
         </div>
-        {!imageUrls.imageURL6 ? (
+        {!imageUrls.imageURL6 || imageUrls.imageURL6 === "" ? (
           <div>Loading...</div>
         ) : (
           <Image
