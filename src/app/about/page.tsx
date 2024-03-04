@@ -271,7 +271,7 @@ const About: React.FC = () => {
           </p>
         </div>
         <Image
-          src={imageUrls.imageURL6}
+          src={imageUrls.imageURL6 || <div>Loading...</div>}
           width={1600}
           height={800}
           style={{ objectFit: "cover" }}
