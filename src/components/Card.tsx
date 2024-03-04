@@ -22,8 +22,6 @@ const Card = () => {
 
   const itemShowcase = data.slice(0, 3);
 
-  console.log(data);
-
   return (
     <>
       {itemShowcase.map((product) => (
