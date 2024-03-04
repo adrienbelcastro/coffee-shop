@@ -58,7 +58,7 @@ const About: React.FC = () => {
     imageURL4: "",
     imageURL5: "",
     imageURL6: "",
-  });
+  } as ImageUrls);
 
   async function getImageURL(): Promise<ImageUrls> {
     try {
