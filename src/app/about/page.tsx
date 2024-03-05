@@ -12,7 +12,7 @@ interface ImageUrls {
   imageURL3: string;
   imageURL4: string;
   imageURL5: string;
-  imageURL6: string;
+  // imageURL6: string;
 }
 
 const About: React.FC = () => {
@@ -46,10 +46,10 @@ const About: React.FC = () => {
     threshold: 0.5,
   });
 
-  const [ref7, inView7] = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
+  // const [ref7, inView7] = useInView({
+  //   triggerOnce: false,
+  //   threshold: 0.5,
+  // });
 
   const [imageUrls, setImageUrls] = useState<ImageUrls>({
     imageURL: "",
@@ -57,7 +57,7 @@ const About: React.FC = () => {
     imageURL3: "",
     imageURL4: "",
     imageURL5: "",
-    imageURL6: "",
+    // imageURL6: "",
   } as ImageUrls);
 
   async function getImageURL(): Promise<ImageUrls> {
@@ -79,7 +79,7 @@ const About: React.FC = () => {
 
         imageURL5: data.results[5].urls.regular,
 
-        imageURL6: data.results[6].urls.regular,
+        // imageURL6: data.results[6].urls.regular,
       };
     } catch (error) {
       console.error("Error retrieving imageURL:", error);
@@ -253,7 +253,7 @@ const About: React.FC = () => {
           alt="Coffee Beans"
         />
       </motion.div>
-      <motion.div
+      {/* <motion.div
         ref={ref7}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: inView7 ? 1 : 0, y: inView7 ? 0 : 20 }}
@@ -283,7 +283,7 @@ const About: React.FC = () => {
             alt="Coffee Beans"
           />
         )}
-      </motion.div>
+      </motion.div> */}
       <Footer />
     </>
   );
