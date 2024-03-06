@@ -1,7 +1,9 @@
 import { initSupabase } from "../../../../lib/supabase/supabaseClient";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export const GET = async (req: Request, res: Response) => {
+export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    console.log(req);
     const categoryId = res.params.categoryId;
 
     if (!categoryId) {
