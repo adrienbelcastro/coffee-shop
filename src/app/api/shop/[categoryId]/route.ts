@@ -1,13 +1,16 @@
 import { initSupabase } from "../../../../lib/supabase/supabaseClient";
-import { NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req: Request, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     console.log(req);
     const categoryId = res.params.categoryId;
 
     if (!categoryId) {
-      return new Response("Category parameter is missing", { status: 400 });
+      return res.status(400).json({ error: "Category parameter is missing" });
     }
 
     const supabase = initSupabase();
@@ -18,12 +21,12 @@ export default async function handler(req: Request, res: NextApiResponse) {
 
     if (error) {
       console.error("Error fetching products:", error);
-      return new Response("Error fetching products", { status: 500 });
+      return res.status(500).json({ error: "Error fetching products" });
     }
 
-    return new Response(JSON.stringify(data), { status: 200 });
+    return res.status(200).json(data);
   } catch (error) {
     console.error("Unexpected error in the API route:", error);
-    return new Response("Unexpected error in the API route", { status: 500 });
+    return res.status(500).json({ error: "Unexpected error in the API route" });
   }
 }
