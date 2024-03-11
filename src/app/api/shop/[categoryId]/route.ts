@@ -1,7 +1,7 @@
 import { initSupabase } from "../../../../lib/supabase/supabaseClient";
 import { NextApiResponse } from "next";
 
-export const GET = async (req: Request, res: NextApiResponse) => {
+export default async function handler(req: Request, res: NextApiResponse) {
   try {
     console.log(req);
     const categoryId = res.params.categoryId;
@@ -26,4 +26,4 @@ export const GET = async (req: Request, res: NextApiResponse) => {
     console.error("Unexpected error in the API route:", error);
     return new Response("Unexpected error in the API route", { status: 500 });
   }
-};
+}
