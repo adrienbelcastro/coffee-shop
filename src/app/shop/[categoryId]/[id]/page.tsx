@@ -15,6 +15,7 @@ const Page = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        console.log(typeof id);
         const result = await fetch(
           `http://localhost:3000/api/shop/${categoryId}/${id}`
         );
