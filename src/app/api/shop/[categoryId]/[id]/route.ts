@@ -27,12 +27,9 @@ interface Price {
   price: number;
 }
 
-export const GET = async (
-  req: NextRequest,
-  res: NextResponse<ProductDataResponse | ErrorResponse>
-) => {
+export const GET = async (req, res) => {
   try {
-    const productId = res.params.id;
+    const productId: any = res.params.id;
 
     if (!productId) {
       return new Response("Category parameter is missing", { status: 400 });
