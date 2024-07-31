@@ -40,7 +40,7 @@ export async function GET(
 
     const supabase = initSupabase();
     const { data: productData, error: productError } = await supabase
-      .from<Product>("products")
+      .from("products")
       .select("product_id, name, description, sizes_needed")
       .eq("product_id", parseInt(productId))
       .single();
@@ -51,7 +51,7 @@ export async function GET(
 
     const { data: productOptionsData, error: productOptionsError } =
       await supabase
-        .from<ProductOptions>("product_options")
+        .from("product_options")
         .select("*")
         .eq("product_id", parseInt(productId));
 
@@ -72,7 +72,7 @@ export async function GET(
         }
 
         const { data: choices, error: choicesError } = await supabase
-          .from<Choice>("options_choices")
+          .from("options_choices")
           .select("choice_id, choice_name")
           .eq("option_id", option.option_id);
 
