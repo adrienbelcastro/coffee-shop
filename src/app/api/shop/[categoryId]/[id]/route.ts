@@ -46,7 +46,7 @@ export async function GET(
       .single();
 
     const { data: optionData, error: optionsError } = await supabase
-      .from<Option>("options")
+      .from("options")
       .select("*");
 
     const { data: productOptionsData, error: productOptionsError } =
@@ -84,7 +84,7 @@ export async function GET(
         const choicesWithPrices = await Promise.all(
           choices.map(async (choice: Choice) => {
             const { data: prices, error: pricesError } = await supabase
-              .from<Price>("prices")
+              .from("prices")
               .select("price")
               .eq("option_id", option.option_id)
               .eq("choice_id", choice.choice_id)
