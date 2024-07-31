@@ -1,5 +1,5 @@
 import { initSupabase } from "../../../../../lib/supabase/supabaseClient";
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 interface Product {
   productId: number;
@@ -27,9 +27,12 @@ interface Price {
   price: number;
 }
 
-export const GET = async (req, res) => {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { slug: string } }
+) {
   try {
-    const productId: any = res.params.id;
+    const productId = params.id;
 
     if (!productId) {
       return new Response("Category parameter is missing", { status: 400 });
@@ -116,7 +119,7 @@ export const GET = async (req, res) => {
     console.error(`Error fetching product details`, error);
     return new Response("Internal Server Error", { status: 500 });
   }
-};
+}
 
 interface ProductDataResponse {
   product: Product;
