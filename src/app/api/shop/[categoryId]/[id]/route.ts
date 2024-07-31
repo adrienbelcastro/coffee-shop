@@ -88,7 +88,7 @@ export async function GET(
               .select("price")
               .eq("option_id", option.option_id)
               .eq("choice_id", choice.choice_id)
-              .eq("product_id", productId);
+              .eq("product_id", parseInt(productId));
 
             if (pricesError) {
               console.error("Error fetching prices:", pricesError);
