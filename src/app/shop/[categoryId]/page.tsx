@@ -42,7 +42,10 @@ export default async function Page({
   }
 
   const { categoryId } = params;
-  const data = await fetchProducts({ categoryId, slug: searchParams?.slug });
+  const data = await fetchProducts({
+    categoryId,
+    slug: searchParams?.slug as string,
+  });
 
   return (
     <>
@@ -54,7 +57,7 @@ export default async function Page({
           </h3>
 
           <div className="grid grid-cols-2 gap-y-8 gap-x-64">
-            {data.map((product) => (
+            {data.map((product: Product) => (
               <Link
                 key={product.product_id}
                 href={`/shop/${categoryId}/${product.product_id}`}
