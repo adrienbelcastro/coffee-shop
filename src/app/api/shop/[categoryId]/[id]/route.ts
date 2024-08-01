@@ -2,7 +2,7 @@ import { initSupabase } from "../../../../../lib/supabase/supabaseClient";
 import { NextRequest, NextResponse } from "next/server";
 
 interface Product {
-  productId: number;
+  productId: string;
   name: string;
   description: string;
 }
@@ -113,6 +113,8 @@ export async function GET(
       product: productData,
       options: optionsWithChoice,
     };
+
+    console.log(productData);
 
     return NextResponse.json(responseData, { status: 200 });
   } catch (error) {
