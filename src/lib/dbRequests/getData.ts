@@ -12,7 +12,7 @@ export const fetchData = async (endpoint: string) => {
 
     return data;
   } catch (error) {
-    console.error("Error fetching data:", error.message);
+    console.error("Error fetching data:", error);
 
     return [];
   }
