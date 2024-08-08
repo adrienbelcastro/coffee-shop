@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const categoryId = params.categoryId;
+    const categoryId = params.id;
 
     if (!categoryId) {
       return NextResponse.json({ error: "Category parameter is missing" });
