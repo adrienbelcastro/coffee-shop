@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Link from "../../../node_modules/next/link";
 
 interface Category {
-  id: Number;
+  id: string;
   name: string;
 }
 
