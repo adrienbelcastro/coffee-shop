@@ -1,10 +1,12 @@
 import { initSupabase } from "../../../../lib/supabase/supabaseClient";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
-  console.log();
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
-    const categoryId = NextResponse.categoryId;
+    const categoryId = params.categoryId;
 
     if (!categoryId) {
       return NextResponse.json({ error: "Category parameter is missing" });
