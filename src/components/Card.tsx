@@ -5,6 +5,12 @@ import { fetchData } from "../lib/dbRequests/getData";
 import { useEffect, useState } from "react";
 import Link from "../../node_modules/next/link";
 
+interface Data {
+  product_id: string;
+  category_id: Number;
+  name: string;
+}
+
 const Card = () => {
   const [data, setData] = useState([]);
 
@@ -14,7 +20,7 @@ const Card = () => {
         const result = await fetchData("/api/products");
         setData(result || []);
       } catch (error) {
-        console.error("Error fetching data on the client:", error.message);
+        console.error("Error fetching data on the client:", error);
       }
     };
     fetchProducts();
@@ -24,7 +30,7 @@ const Card = () => {
 
   return (
     <>
-      {itemShowcase.map((product) => (
+      {itemShowcase.map((product: Data) => (
         <Link
           key={product.product_id}
           href={`/shop/${product.category_id}/${product.product_id}`}

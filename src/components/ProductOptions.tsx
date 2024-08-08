@@ -5,14 +5,22 @@ interface Option {
   option_id: number;
   options_name: string;
   description: string;
-  choices: string[];
+  choices: Choice[];
 }
 
 interface Props {
   optionsData: Option[];
 }
 
-const ProductOptions: React.FC<Props> = ({ optionsData }) => {
+interface Choice {
+  choice_name: string;
+  prices: Price[];
+}
+
+interface Price {
+  price: number;
+}
+const ProductOptions = ({ optionsData }: Props) => {
   if (!optionsData || !optionsData.length) {
     return null;
   }
@@ -27,7 +35,7 @@ const ProductOptions: React.FC<Props> = ({ optionsData }) => {
             <select className="w-full border-2 rounded-lg p-2">
               <option value="">Select Option</option>
               {option.choices.map((choice, choiceIndex) => (
-                <option key={choiceIndex} value={choice}>
+                <option key={choiceIndex} value={choice.choice_name}>
                   {choice.choice_name}
                   {choice.prices.length > 0 && (
                     <span> - ${choice.prices[0].price.toFixed(2)}</span>

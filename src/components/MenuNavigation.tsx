@@ -15,7 +15,7 @@ const MenuNavigation: React.FC = () => {
         const result = await fetchData("/api/products");
         setMenuItems(result || []);
       } catch (error) {
-        console.error("Error fetching data on the client:", error.message);
+        console.error("Error fetching data on the client:", error);
       }
     };
     fetchProducts();
