@@ -24,7 +24,6 @@ export default async function Page({
   params: { categoryId: string };
 }) {
   const productListData = await getItems(categoryId);
-
   return (
     <>
       <Header />
