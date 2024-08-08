@@ -39,8 +39,6 @@ export default async function Page({
 }) {
   const { categoryId, id } = params;
 
-  console.log("Category ID:", categoryId);
-  console.log("Product ID:", id);
   const data = await fetchProducts(categoryId, id);
 
   return (
@@ -53,7 +51,7 @@ export default async function Page({
       <div className=" flex justify-center  gap-44 mt-8 h-[500px] max-h-[500px] max-w-[150px">
         <div className="w-[35%]">
           <h3 className="text-3xl border-b-4 pb-4">Size Options</h3>
-          {data.product.sizes_needed ? <SizeSelector sizes={data} /> : null}
+          {data.product.sizes_needed ? <SizeSelector /> : null}
         </div>
         <div className="w-[35%]">
           <ProductOptions optionsData={data.options} />
