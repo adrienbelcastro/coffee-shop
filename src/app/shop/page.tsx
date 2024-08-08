@@ -3,6 +3,11 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Link from "../../../node_modules/next/link";
 
+interface Category {
+  id: Number;
+  name: string;
+}
+
 async function getData() {
   const result = await fetch("http://localhost:3000/api/shop");
 
@@ -25,7 +30,7 @@ export default async function Page() {
             Menu
           </h3>
           <div className="grid grid-cols-2 gap-y-8 gap-x-64">
-            {data.map((product) => (
+            {data.map((product: Category) => (
               <Link key={product.id} href={`/shop/${product.id}`}>
                 <div className="flex gap-4 items-center">
                   <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>

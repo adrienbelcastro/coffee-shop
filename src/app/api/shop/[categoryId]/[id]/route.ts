@@ -2,9 +2,10 @@ import { initSupabase } from "../../../../../lib/supabase/supabaseClient";
 import { NextRequest, NextResponse } from "next/server";
 
 interface Product {
-  productId: string;
+  productId: number;
   name: string;
   description: string;
+  sizes_needed: Boolean;
 }
 
 interface ProductOptions {
@@ -29,12 +30,12 @@ interface Price {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { categoryId: string; id: string } }
 ) {
   try {
-    const productId = params.id;
+    const { categoryId, id } = params;
 
-    if (!productId) {
+    if (!id || !categoryId) {
       return new Response("Category parameter is missing", { status: 400 });
     }
 
@@ -42,7 +43,8 @@ export async function GET(
     const { data: productData, error: productError } = await supabase
       .from("products")
       .select("product_id, name, description, sizes_needed")
-      .eq("product_id", parseInt(productId))
+      .eq("product_id", parseInt(id))
+      .eq("category_id", parseInt(categoryId))
       .single();
 
     const { data: optionData, error: optionsError } = await supabase
@@ -53,7 +55,7 @@ export async function GET(
       await supabase
         .from("product_options")
         .select("*")
-        .eq("product_id", parseInt(productId));
+        .eq("product_id", parseInt(id));
 
     if (productError || optionsError || productOptionsError) {
       console.error("Error fetching products:", productError || optionsError);
@@ -88,7 +90,7 @@ export async function GET(
               .select("price")
               .eq("option_id", option.option_id)
               .eq("choice_id", choice.choice_id)
-              .eq("product_id", parseInt(productId));
+              .eq("product_id", parseInt(id));
 
             if (pricesError) {
               console.error("Error fetching prices:", pricesError);
@@ -109,12 +111,19 @@ export async function GET(
       })
     );
 
-    const responseData: ProductDataResponse = {
-      product: productData,
-      options: optionsWithChoice,
+    console.log(productData.sizes_needed);
+
+    const transformedProductData: Product = {
+      productId: productData.product_id,
+      name: productData.name,
+      description: productData.description,
+      sizes_needed: productData.sizes_needed,
     };
 
-    console.log(productData);
+    const responseData: ProductDataResponse = {
+      product: transformedProductData,
+      options: optionsWithChoice,
+    };
 
     return NextResponse.json(responseData, { status: 200 });
   } catch (error) {
@@ -136,6 +145,6 @@ interface ChoiceWithPrices extends Choice {
   prices: Price[];
 }
 
-interface ErrorResponse {
-  error: string;
-}
+// interface ErrorResponse {
+//   error: string;
+// }
