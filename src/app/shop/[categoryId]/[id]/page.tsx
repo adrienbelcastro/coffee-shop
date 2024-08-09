@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductOptions from "@/components/ProductOptions";
 import SizeSelector from "@/components/SizeSelector";
+import API_URL from "./../../../../../utils";
 
 interface Product {
   productId: number;
@@ -23,7 +24,7 @@ interface OptionWithChoices {
 }
 
 async function fetchProducts(categoryId: string, id: string) {
-  const res = await fetch(`http://localhost:3000/api/shop/${categoryId}/${id}`);
+  const res = await fetch(`${API_URL}/api/shop/${categoryId}/${id}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

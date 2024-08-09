@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Link from "../../../../node_modules/next/link";
+import API_URL from "./../../../../utils";
 
 type Product = {
   product_id: string;
@@ -9,7 +10,7 @@ type Product = {
 };
 
 async function getItems(categoryId: string) {
-  const res = await fetch(`http://localhost:3000/api/shop/${categoryId}`);
+  const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
 
   if (!res) {
     throw new Error("Failed to fetch data");

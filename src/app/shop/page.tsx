@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Link from "../../../node_modules/next/link";
+import API_URL from "./../../../utils";
 
 interface Category {
   id: string;
@@ -9,7 +10,7 @@ interface Category {
 }
 
 async function getData() {
-  const result = await fetch("http://localhost:3000/api/shop");
+  const result = await fetch(`${API_URL}/api/shop`);
 
   if (!result) {
     throw new Error("Failed to fetch data");
