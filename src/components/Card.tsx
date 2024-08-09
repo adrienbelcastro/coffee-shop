@@ -1,8 +1,7 @@
-"use client";
 import beans from "../../public/assets/coffeebeans-hero.png";
 import Image from "next/image";
-import { fetchData } from "../lib/dbRequests/getData";
-import { useEffect, useState } from "react";
+import API_URL from "./../../utils";
+
 import Link from "../../node_modules/next/link";
 
 interface Data {
@@ -11,20 +10,17 @@ interface Data {
   name: string;
 }
 
-const Card = () => {
-  const [data, setData] = useState([]);
+async function fetchProducts() {
+  const result = await fetch(`${API_URL}/api/products`);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const result = await fetchData("/api/products");
-        setData(result || []);
-      } catch (error) {
-        console.error("Error fetching data on the client:", error);
-      }
-    };
-    fetchProducts();
-  }, []);
+  if (!result) {
+    throw new Error("Error fetching data on the client:");
+  }
+
+  return result.json();
+}
+export default async function Card() {
+  const data = await fetchProducts();
 
   const itemShowcase = data.slice(0, 3);
 
@@ -49,6 +45,4 @@ const Card = () => {
       ))}
     </>
   );
-};
-
-export default Card;
+}
