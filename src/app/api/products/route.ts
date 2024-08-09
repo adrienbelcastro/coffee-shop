@@ -3,11 +3,7 @@ import { initSupabase } from "../../../lib/supabase/supabaseClient";
 export const GET = async (req: Request, res: Response) => {
   try {
     const supabase = initSupabase();
-    const { data, error } = await supabase
-      .from("products")
-      .select(
-        "product_id, name,description,category_id, filters, prices(price)"
-      );
+    const { data, error } = await supabase.from("products").select("*");
 
     if (error) {
       return new Response("Error fetching products", { status: 500 });
