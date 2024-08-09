@@ -1,10 +1,9 @@
 "use client";
-
 import React from "react";
-import { fetchData } from "../lib/dbRequests/getData";
+import API_URL from "./../../utils";
 import { useEffect, useState } from "react";
 
-const MenuNavigation: React.FC = () => {
+const MenuNavigation = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>("Hot Drinks");
   const [menuData, setMenuItems] = useState<any[]>([]);
   const [displayedMenuItems, setDisplayedMenuItems] = useState<any[]>([]);
@@ -12,7 +11,8 @@ const MenuNavigation: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const result = await fetchData("/api/products");
+        const response = await fetch(`${API_URL}/api/products`);
+        const result = await response.json();
         setMenuItems(result || []);
       } catch (error) {
         console.error("Error fetching data on the client:", error);
