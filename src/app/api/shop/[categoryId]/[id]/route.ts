@@ -1,10 +1,11 @@
 import { initSupabase } from "../../../../../lib/supabase/supabaseClient";
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 interface Product {
   productId: number;
   name: string;
   description: string;
+  sizes_needed: Boolean;
 }
 
 interface ProductOptions {
@@ -27,33 +28,34 @@ interface Price {
   price: number;
 }
 
-export const GET = async (
-  req: NextRequest,
-  res: NextResponse<ProductDataResponse | ErrorResponse>
-) => {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { categoryId: string; id: string } }
+) {
   try {
-    const productId = res.params.id;
+    const { categoryId, id } = params;
 
-    if (!productId) {
+    if (!id || !categoryId) {
       return new Response("Category parameter is missing", { status: 400 });
     }
 
     const supabase = initSupabase();
     const { data: productData, error: productError } = await supabase
-      .from<Product>("products")
+      .from("products")
       .select("product_id, name, description, sizes_needed")
-      .eq("product_id", parseInt(productId))
+      .eq("product_id", parseInt(id))
+      .eq("category_id", parseInt(categoryId))
       .single();
 
     const { data: optionData, error: optionsError } = await supabase
-      .from<Option>("options")
+      .from("options")
       .select("*");
 
     const { data: productOptionsData, error: productOptionsError } =
       await supabase
-        .from<ProductOptions>("product_options")
+        .from("product_options")
         .select("*")
-        .eq("product_id", parseInt(productId));
+        .eq("product_id", parseInt(id));
 
     if (productError || optionsError || productOptionsError) {
       console.error("Error fetching products:", productError || optionsError);
@@ -72,7 +74,7 @@ export const GET = async (
         }
 
         const { data: choices, error: choicesError } = await supabase
-          .from<Choice>("options_choices")
+          .from("options_choices")
           .select("choice_id, choice_name")
           .eq("option_id", option.option_id);
 
@@ -84,11 +86,11 @@ export const GET = async (
         const choicesWithPrices = await Promise.all(
           choices.map(async (choice: Choice) => {
             const { data: prices, error: pricesError } = await supabase
-              .from<Price>("prices")
+              .from("prices")
               .select("price")
               .eq("option_id", option.option_id)
               .eq("choice_id", choice.choice_id)
-              .eq("product_id", productId);
+              .eq("product_id", parseInt(id));
 
             if (pricesError) {
               console.error("Error fetching prices:", pricesError);
@@ -109,8 +111,17 @@ export const GET = async (
       })
     );
 
+    console.log(productData.sizes_needed);
+
+    const transformedProductData: Product = {
+      productId: productData.product_id,
+      name: productData.name,
+      description: productData.description,
+      sizes_needed: productData.sizes_needed,
+    };
+
     const responseData: ProductDataResponse = {
-      product: productData,
+      product: transformedProductData,
       options: optionsWithChoice,
     };
 
@@ -119,7 +130,7 @@ export const GET = async (
     console.error(`Error fetching product details`, error);
     return new Response("Internal Server Error", { status: 500 });
   }
-};
+}
 
 interface ProductDataResponse {
   product: Product;
@@ -134,6 +145,6 @@ interface ChoiceWithPrices extends Choice {
   prices: Price[];
 }
 
-interface ErrorResponse {
-  error: string;
-}
+// interface ErrorResponse {
+//   error: string;
+// }
