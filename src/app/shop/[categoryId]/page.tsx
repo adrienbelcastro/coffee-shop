@@ -2,48 +2,29 @@ import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Link from "../../../../node_modules/next/link";
+import API_URL from "./../../../../utils";
 
 type Product = {
-  product_id: number;
+  product_id: string;
   name: string;
 };
 
-type Props = {
-  categoryId: number;
-  products: Product[];
-};
+async function getItems(categoryId: string) {
+  const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
 
-async function fetchProducts({
-  categoryId,
-  slug,
-}: {
-  categoryId: number;
-  slug?: string;
-}) {
-  const result = await fetch(`http://localhost:3000/api/shop/${categoryId}`);
-
-  if (!result) {
+  if (!res) {
     throw new Error("Failed to fetch data");
   }
 
-  return result.json();
+  return res.json();
 }
 
 export default async function Page({
-  params,
-  searchParams,
+  params: { categoryId },
 }: {
-  params?: { categoryId: number; slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: { categoryId: string };
 }) {
-  if (!params) {
-    // Handle the case where params is undefined
-    return <div>Loading...</div>;
-  }
-
-  const { categoryId } = params;
-  const data = await fetchProducts({ categoryId, slug: searchParams?.slug });
-
+  const productListData = await getItems(categoryId);
   return (
     <>
       <Header />
@@ -54,7 +35,7 @@ export default async function Page({
           </h3>
 
           <div className="grid grid-cols-2 gap-y-8 gap-x-64">
-            {data.map((product) => (
+            {productListData.map((product: Product) => (
               <Link
                 key={product.product_id}
                 href={`/shop/${categoryId}/${product.product_id}`}

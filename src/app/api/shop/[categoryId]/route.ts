@@ -1,11 +1,15 @@
 import { initSupabase } from "../../../../lib/supabase/supabaseClient";
+import { NextResponse } from "next/server";
 
-export const GET = async (req: Request, res: Response) => {
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
-    const categoryId = res.params.categoryId;
+    const categoryId = params.id;
 
     if (!categoryId) {
-      return new Response("Category parameter is missing", { status: 400 });
+      return NextResponse.json({ error: "Category parameter is missing" });
     }
 
     const supabase = initSupabase();
@@ -16,12 +20,12 @@ export const GET = async (req: Request, res: Response) => {
 
     if (error) {
       console.error("Error fetching products:", error);
-      return new Response("Error fetching products", { status: 500 });
+      return NextResponse.json({ error: "Error fetching products" });
     }
 
-    return new Response(JSON.stringify(data), { status: 200 });
+    return NextResponse.json(data);
   } catch (error) {
     console.error("Unexpected error in the API route:", error);
-    return new Response("Unexpected error in the API route", { status: 500 });
+    return NextResponse.json({ error: "Unexpected error in the API route" });
   }
-};
+}
