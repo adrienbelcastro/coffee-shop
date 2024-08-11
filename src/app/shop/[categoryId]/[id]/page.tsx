@@ -40,6 +40,10 @@ export default async function Page({
 }) {
   const { categoryId, id } = params;
 
+  if (!API_URL) {
+    return null;
+  }
+
   const data = await fetchProducts(categoryId, id);
 
   return (
