@@ -28,6 +28,7 @@ export default async function Page({
     return null;
   }
   const productListData = await getItems(categoryId);
+  console.log(productListData);
   return (
     <>
       <Header />

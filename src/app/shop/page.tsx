@@ -24,6 +24,7 @@ export default async function Page() {
     return null;
   }
   const data = await getData();
+  console.log(data);
 
   return (
     <>
