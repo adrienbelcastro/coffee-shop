@@ -20,6 +20,9 @@ async function getData() {
 }
 
 export default async function Page() {
+  if (!API_URL) {
+    return null;
+  }
   const data = await getData();
 
   return (
