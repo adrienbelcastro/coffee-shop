@@ -20,6 +20,9 @@ async function fetchProducts() {
   return result.json();
 }
 export default async function Card() {
+  if (!API_URL) {
+    return null;
+  }
   const data = await fetchProducts();
 
   const itemShowcase = data.slice(0, 3);

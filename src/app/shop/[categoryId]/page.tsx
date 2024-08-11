@@ -24,6 +24,9 @@ export default async function Page({
 }: {
   params: { categoryId: string };
 }) {
+  if (!API_URL) {
+    return null;
+  }
   const productListData = await getItems(categoryId);
   return (
     <>

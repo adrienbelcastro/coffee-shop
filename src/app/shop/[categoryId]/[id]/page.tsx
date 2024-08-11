@@ -38,6 +38,9 @@ export default async function Page({
 }: {
   params: { categoryId: string; id: string };
 }) {
+  if (!API_URL) {
+    return null;
+  }
   const { categoryId, id } = params;
 
   const data = await fetchProducts(categoryId, id);
