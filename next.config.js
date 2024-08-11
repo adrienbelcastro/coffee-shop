@@ -10,6 +10,7 @@ module.exports = {
       },
     ];
   },
+  crossOrigin: "anonymous",
   images: {
     domains: ["images.unsplash.com"],
   },
