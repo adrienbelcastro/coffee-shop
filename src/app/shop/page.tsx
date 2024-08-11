@@ -13,6 +13,9 @@ async function getData() {
   const result = await fetch(`${API_URL}/api/shop`);
 
   if (!result) {
+    console.error(
+      `Failed to fetch data: ${result.status} - ${result.statusText}`
+    );
     throw new Error("Failed to fetch data");
   }
 
