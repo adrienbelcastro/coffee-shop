@@ -9,7 +9,10 @@ export async function GET(
     const categoryId = params.id;
 
     if (!categoryId) {
-      return NextResponse.json({ error: "Category parameter is missing" });
+      return NextResponse.json(
+        { error: "Category parameter is missing" },
+        { status: 400 }
+      );
     }
 
     const supabase = initSupabase();
@@ -20,12 +23,18 @@ export async function GET(
 
     if (error) {
       console.error("Error fetching products:", error);
-      return NextResponse.json({ error: "Error fetching products" });
+      return NextResponse.json(
+        { error: "Error fetching products" },
+        { error: 500 }
+      );
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.error("Unexpected error in the API route:", error);
-    return NextResponse.json({ error: "Unexpected error in the API route" });
+    return NextResponse.json(
+      { error: "Unexpected error in the API route" },
+      { status: 500 }
+    );
   }
 }
