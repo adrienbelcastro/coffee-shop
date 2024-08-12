@@ -1,3 +1,3 @@
-const API_URL = process.env.NEXTAUTH_URL || "";
+const API_URL = process.env.NEXT_PUBLIC_URL;
 
 export default API_URL;
