@@ -6,6 +6,12 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    if (request.method !== "GET") {
+      return NextResponse.json(
+        { error: "Method not allowed" },
+        { status: 405 }
+      );
+    }
     const categoryId = params.id;
 
     if (!categoryId) {
