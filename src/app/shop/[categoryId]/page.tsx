@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Link from "../../../../node_modules/next/link";
+import Link from "next/link";
 import API_URL from "./../../../../utils";
 
 type Product = {
@@ -28,6 +28,7 @@ export default async function Page({
     return null;
   }
   const productListData = await getItems(categoryId);
+  console.log(productListData);
   return (
     <>
       <Header />
