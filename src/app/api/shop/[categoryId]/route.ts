@@ -28,7 +28,7 @@ export async function GET(
       .eq("category_id", categoryId);
 
     if (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching products:", error.message);
       return NextResponse.json(
         { error: "Error fetching products" },
         { status: 500 }
