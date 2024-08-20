@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Link from "../../../../node_modules/next/link";
+import Link from "next/link";
 import API_URL from "./../../../../utils";
 
 type Product = {
@@ -12,11 +12,12 @@ type Product = {
 async function getItems(categoryId: string) {
   const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
 
-  if (!res) {
-    throw new Error("Failed to fetch data");
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(`Failed to fetch data: ${errorText}`);
   }
 
-  return res.json();
+  return await res.json();
 }
 
 export default async function Page({
@@ -25,8 +26,10 @@ export default async function Page({
   params: { categoryId: string };
 }) {
   if (!API_URL) {
-    return null;
+    return <p>API Is Not Defined</p>;
   }
+   console.log(API_URL);
+  
   const productListData = await getItems(categoryId);
   console.log(productListData);
   return (

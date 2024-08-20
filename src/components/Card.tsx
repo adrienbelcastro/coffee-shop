@@ -21,8 +21,10 @@ async function fetchProducts() {
 }
 export default async function Card() {
   if (!API_URL) {
-    return null;
+       return <p>API Is Not Defined</p>;
   }
+  
+   console.log(API_URL);
 
   const data = await fetchProducts();
 
