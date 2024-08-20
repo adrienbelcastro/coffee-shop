@@ -10,19 +10,26 @@ interface Category {
 }
 
 async function getData() {
-  const result = await fetch(`${API_URL}/api/shop`);
+  try {
+    const result = await fetch(`${API_URL}/api/shop`);
 
-  if (!result) {
-    throw new Error("Failed to fetch data");
+    if (!result) {
+      throw new Error("Failed to fetch data");
+    }
+
+    return result.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
   }
-
-  return result.json();
 }
 
 export default async function Page() {
   if (!API_URL) {
-    return null;
+    return <p>API Is Not Defined</p>;
   }
+
+  console.log(API_URL);
   const data = await getData();
 
   return (

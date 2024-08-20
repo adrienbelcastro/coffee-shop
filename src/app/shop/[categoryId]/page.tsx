@@ -26,7 +26,7 @@ export default async function Page({
   params: { categoryId: string };
 }) {
   if (!API_URL) {
-    return null;
+    return <p>API Is Not Defined</p>;
   }
   const productListData = await getItems(categoryId);
   console.log(productListData);

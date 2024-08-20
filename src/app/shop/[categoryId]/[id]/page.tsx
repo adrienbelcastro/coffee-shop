@@ -39,7 +39,7 @@ export default async function Page({
   params: { categoryId: string; id: string };
 }) {
   if (!API_URL) {
-    return null;
+    return <p>API Is Not Defined</p>;
   }
   const { categoryId, id } = params;
 
