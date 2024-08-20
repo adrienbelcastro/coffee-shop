@@ -28,6 +28,8 @@ export default async function Page({
   if (!API_URL) {
     return <p>API Is Not Defined</p>;
   }
+   console.log(API_URL);
+  
   const productListData = await getItems(categoryId);
   console.log(productListData);
   return (

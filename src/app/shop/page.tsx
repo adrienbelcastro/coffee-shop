@@ -30,7 +30,9 @@ export default async function Page() {
   }
 
   console.log(API_URL);
+
   const data = await getData();
+
 
   return (
     <>
