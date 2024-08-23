@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { categoryId: string } }
 ) {
   try {
     if (request.method !== "GET") {
@@ -12,7 +12,7 @@ export async function GET(
         { status: 405 }
       );
     }
-    const categoryId = params.id;
+    const categoryId = params.categoryId;
 
     if (!categoryId) {
       return NextResponse.json(
