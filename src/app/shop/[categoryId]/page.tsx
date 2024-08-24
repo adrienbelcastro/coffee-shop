@@ -10,19 +10,15 @@ type Product = {
 };
 
 async function getItems(categoryId: string) {
-  try {
-    const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
-    console.log("Response status:", res.status); // Log status
-    console.log("Response headers:", res.headers); // Log headers
+  const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error("Fetch error text:", errorText);
-      throw new Error(`Failed to fetch data: ${errorText}`);
-    }
-  } catch (error: any) {
-    console.error("Caught error in frontend:", error.message);
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error("Fetch error text:", errorText);
+    throw new Error(`Failed to fetch data: ${errorText}`);
   }
+
+  return res.json();
 }
 
 export default async function Page({
@@ -36,7 +32,9 @@ export default async function Page({
 
   try {
     const productListData = await getItems(categoryId);
-    console.log("Fetched data:", productListData);
+    if (!Array.isArray(productListData)) {
+      throw new Error("Expected an array of products");
+    }
 
     return (
       <>
