@@ -20,9 +20,6 @@ async function getItems(categoryId: string) {
       console.error("Fetch error text:", errorText);
       throw new Error(`Failed to fetch data: ${errorText}`);
     }
-
-    const productListData = await res.json();
-    console.log("Fetched data:", productListData);
   } catch (error: any) {
     console.error("Caught error in frontend:", error.message);
   }
@@ -39,6 +36,7 @@ export default async function Page({
 
   try {
     const productListData = await getItems(categoryId);
+    console.log("Fetched data:", productListData);
 
     return (
       <>
