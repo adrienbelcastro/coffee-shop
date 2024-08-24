@@ -19,7 +19,8 @@ async function getItems(categoryId: string) {
     throw new Error(`Failed to fetch data: ${errorText}`);
   }
 
-  return res.json();
+  const result = res.json();
+  console.log(result);
 }
 
 export default async function Page({
