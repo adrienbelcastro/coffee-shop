@@ -61,6 +61,10 @@ export default async function Page({
       </>
     );
   } catch (error) {
-    return <></>;
+    return (
+      <>
+        <p>error occurred</p>
+      </>
+    );
   }
 }
