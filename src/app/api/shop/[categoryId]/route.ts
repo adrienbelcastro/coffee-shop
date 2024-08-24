@@ -46,6 +46,6 @@ import { NextResponse } from "next/server";
 // }
 
 // /app/api/shop/[categoryId]/route.ts
-export async function GET({ params }: { params: { categoryId: string } }) {
+export async function GET(request: Request{ params }: { params: { categoryId: string } }) {
   return new NextResponse(`Category ID: ${params.categoryId}`);
 }
