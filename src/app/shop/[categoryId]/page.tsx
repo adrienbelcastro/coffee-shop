@@ -31,7 +31,7 @@ export default async function Page({
 
   try {
     const productListData = await getItems(categoryId);
-    console.log(productListData);
+    console.log(categoryId);
 
     return (
       <>
