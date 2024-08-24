@@ -60,7 +60,8 @@ export default async function Page({
         <Footer />
       </>
     );
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Error fetching product data:", error.message);
     return (
       <>
         <p>error occurred</p>
