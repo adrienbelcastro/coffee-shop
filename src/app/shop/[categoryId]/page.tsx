@@ -10,6 +10,8 @@ type Product = {
 };
 
 async function getItems(categoryId: string) {
+  console.log(categoryId);
+
   const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
 
   if (!res.ok) {
@@ -31,7 +33,6 @@ export default async function Page({
 
   try {
     const productListData = await getItems(categoryId);
-    console.log(categoryId);
 
     return (
       <>
