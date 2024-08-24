@@ -21,20 +21,20 @@ export async function GET(
       .select("*")
       .eq("category_id", categoryId);
 
-    // if (error) {
-    //   console.error("Error fetching products:", error.message);
-    //   return NextResponse.json(
-    //     { error: "Error fetching products" },
-    //     { status: 500 }
-    //   );
-    // }
+    if (error) {
+      console.error("Error fetching products:", error.message);
+      return NextResponse.json(
+        { error: "Error fetching products" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    // console.error("Unexpected error in the API route:", error);
-    // return NextResponse.json(
-    //   { error: "Unexpected error in the API route" },
-    //   { status: 500 }
-    // );
+    console.error("Unexpected error in the API route:", error);
+    return NextResponse.json(
+      { error: "Unexpected error in the API route" },
+      { status: 500 }
+    );
   }
 }
