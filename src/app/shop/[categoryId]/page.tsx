@@ -11,14 +11,22 @@ type Product = {
 
 async function getItems(categoryId: string) {
   const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
+  try {
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Fetch error text:", errorText);
+      throw new Error(`Failed to fetch data: ${errorText}`);
+    }
 
-  if (!res.ok) {
-    const errorText = await res.text();
-    console.error("Fetch error text:", errorText);
-    throw new Error(`Failed to fetch data: ${errorText}`);
+    // Log the response before parsing
+    const data = await res.json();
+    console.log("Response data:", data);
+
+    return data;
+  } catch (error) {
+    console.error("Error in getItems:", error);
+    throw error; // Re-throw the error so it propagates to the caller
   }
-
-  return res.json();
 }
 
 export default async function Page({
