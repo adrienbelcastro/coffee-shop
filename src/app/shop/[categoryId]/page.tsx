@@ -30,34 +30,37 @@ export default async function Page({
     return <p>API Is Not Defined</p>;
   }
   console.log(API_URL);
+  try {
+    const productListData = await getItems(categoryId);
 
-  const productListData = await getItems(categoryId);
-  console.log(productListData);
-  return (
-    <>
-      <Header />
-      <div className="flex justify-center  bg-lightGrey h-[518px]">
-        <div className="m-8 ">
-          <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
-            Menu
-          </h3>
+    return (
+      <>
+        <Header />
+        <div className="flex justify-center  bg-lightGrey h-[518px]">
+          <div className="m-8 ">
+            <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
+              Menu
+            </h3>
 
-          <div className="grid grid-cols-2 gap-y-8 gap-x-64">
-            {productListData.map((product: Product) => (
-              <Link
-                key={product.product_id}
-                href={`/shop/${categoryId}/${product.product_id}`}
-              >
-                <div className="flex gap-4 items-center">
-                  <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
-                  <h3>{product.name}</h3>
-                </div>
-              </Link>
-            ))}
+            <div className="grid grid-cols-2 gap-y-8 gap-x-64">
+              {productListData.map((product: Product) => (
+                <Link
+                  key={product.product_id}
+                  href={`/shop/${categoryId}/${product.product_id}`}
+                >
+                  <div className="flex gap-4 items-center">
+                    <div className="bg-white w-24 h-24 p-4 border-2 border-white rounded-[50%]"></div>
+                    <h3>{product.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <Footer />
-    </>
-  );
+        <Footer />
+      </>
+    );
+  } catch (error) {
+    return <></>;
+  }
 }
