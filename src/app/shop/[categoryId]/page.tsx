@@ -8,7 +8,6 @@ type Product = {
   product_id: string;
   name: string;
 };
-console.log(API_URL);
 
 async function getItems(categoryId: string) {
   const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
@@ -29,9 +28,10 @@ export default async function Page({
   if (!API_URL) {
     return <p>API Is Not Defined</p>;
   }
-  console.log(API_URL);
+
   try {
     const productListData = await getItems(categoryId);
+    console.log(productListData);
 
     return (
       <>

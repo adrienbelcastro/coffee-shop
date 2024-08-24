@@ -29,10 +29,7 @@ export default async function Page() {
     return <p>API Is Not Defined</p>;
   }
 
-  console.log(API_URL);
-
   const data = await getData();
-
 
   return (
     <>
