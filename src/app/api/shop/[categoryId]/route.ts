@@ -38,10 +38,3 @@ export async function GET(
     // );
   }
 }
-
-// export async function GET(
-//   request: Request,
-//   { params }: { params: { categoryId: string } }
-// ) {
-//   return new NextResponse(`Category ID: ${params.categoryId}`);
-// }
