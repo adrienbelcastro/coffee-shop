@@ -5,6 +5,7 @@ export async function GET(
   request: Request,
   { params }: { params: { categoryId: string } }
 ) {
+  console.log(params);
   try {
     const categoryId = params.categoryId;
     console.log("Received categoryId:", categoryId);

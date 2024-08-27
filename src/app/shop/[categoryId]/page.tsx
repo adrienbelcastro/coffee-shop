@@ -11,6 +11,7 @@ type Product = {
 
 async function getItems(categoryId: string) {
   const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
+  console.log(res.ok);
   try {
     if (!res.ok) {
       const errorText = await res.text();
@@ -38,22 +39,24 @@ export default async function Page({
     return <p>API Is Not Defined</p>;
   }
 
-  try {
-    const productListData = await getItems(categoryId);
-    if (!Array.isArray(productListData)) {
-      throw new Error("Expected an array of products");
-    }
+  // try {
+  const productListData = await getItems(categoryId);
+  // if (!Array.isArray(productListData)) {
+  //   throw new Error("Expected an array of products");
+  // }
 
-    return (
-      <>
-        <Header />
-        <div className="flex justify-center  bg-lightGrey h-[518px]">
-          <div className="m-8 ">
-            <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
-              Menu
-            </h3>
+  console.log(productListData);
 
-            <div className="grid grid-cols-2 gap-y-8 gap-x-64">
+  return (
+    <>
+      <Header />
+      <div className="flex justify-center  bg-lightGrey h-[518px]">
+        <div className="m-8 ">
+          <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
+            Menu
+          </h3>
+
+          {/* <div className="grid grid-cols-2 gap-y-8 gap-x-64">
               {productListData.map((product: Product) => (
                 <Link
                   key={product.product_id}
@@ -65,18 +68,18 @@ export default async function Page({
                   </div>
                 </Link>
               ))}
-            </div>
-          </div>
+            </div> */}
         </div>
-        <Footer />
-      </>
-    );
-  } catch (error: any) {
-    console.error("Error fetching product data:", error.message);
-    return (
-      <>
-        <p>error occurred</p>
-      </>
-    );
-  }
+      </div>
+      <Footer />
+    </>
+  );
+  // } catch (error: any) {
+  //   console.error("Error fetching product data:", error.message);
+  //   return (
+  //     <>
+  //       <p>error occurred</p>
+  //     </>
+  //   );
+  // }
 }
