@@ -39,24 +39,24 @@ export default async function Page({
     return <p>API Is Not Defined</p>;
   }
 
-  // try {
-  const productListData = await getItems(categoryId);
-  // if (!Array.isArray(productListData)) {
-  //   throw new Error("Expected an array of products");
-  // }
+  try {
+    const productListData = await getItems(categoryId);
+    if (!Array.isArray(productListData)) {
+      throw new Error("Expected an array of products");
+    }
 
-  console.log(productListData);
+    console.log(productListData);
 
-  return (
-    <>
-      <Header />
-      <div className="flex justify-center  bg-lightGrey h-[518px]">
-        <div className="m-8 ">
-          <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
-            Menu
-          </h3>
+    return (
+      <>
+        <Header />
+        <div className="flex justify-center  bg-lightGrey h-[518px]">
+          <div className="m-8 ">
+            <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
+              Menu
+            </h3>
 
-          {/* <div className="grid grid-cols-2 gap-y-8 gap-x-64">
+            <div className="grid grid-cols-2 gap-y-8 gap-x-64">
               {productListData.map((product: Product) => (
                 <Link
                   key={product.product_id}
@@ -68,18 +68,18 @@ export default async function Page({
                   </div>
                 </Link>
               ))}
-            </div> */}
+            </div>
+          </div>
         </div>
-      </div>
-      <Footer />
-    </>
-  );
-  // } catch (error: any) {
-  //   console.error("Error fetching product data:", error.message);
-  //   return (
-  //     <>
-  //       <p>error occurred</p>
-  //     </>
-  //   );
-  // }
+        <Footer />
+      </>
+    );
+  } catch (error: any) {
+    console.error("Error fetching product data:", error.message);
+    return (
+      <>
+        <p>error occurred</p>
+      </>
+    );
+  }
 }
