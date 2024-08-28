@@ -10,8 +10,8 @@ type Product = {
 };
 
 async function getItems(categoryId: string) {
-  const res = await fetch(`https://coffee-shop-red-five.vercel.app/api/shop/1`);
-  console.log(res.ok);
+  const res = await fetch(`http://localhost:3000/api/shop/1`);
+  console.log(res.status);
   try {
     if (!res.ok) {
       const errorText = await res.text();
