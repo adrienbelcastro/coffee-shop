@@ -1,10 +1,7 @@
 import { initSupabase } from "../../../../lib/supabase/supabaseClient";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function GET(req: NextRequest, res: NextResponse) {
   const categoryId = req.query;
   console.log("Received categoryId:", categoryId);
   if (!categoryId || typeof categoryId !== "string") {
