@@ -16,6 +16,8 @@ async function getItems(categoryId: string) {
     if (!res.ok) {
       const errorText = await res.text();
       console.error("Fetch error text:", errorText);
+      console.error("Response status:", res.status);
+      console.error("Response headers:", res.headers);
       throw new Error(`Failed to fetch data: ${errorText}`);
     }
 
@@ -75,7 +77,12 @@ export default async function Page({
       </>
     );
   } catch (error: any) {
-    console.error("Error fetching product data:", error.message);
+    console.error("Error in getItems:", error);
+    console.error("Error details:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+    });
     return (
       <>
         <p>error occurred</p>
