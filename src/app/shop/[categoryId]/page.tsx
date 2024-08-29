@@ -21,9 +21,7 @@ async function getItems(categoryId: string) {
 
     // Check the content-type to ensure it's JSON
     const contentType = res.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new Error("Received non-JSON response");
-    }
+    console.log("Response Content-Type:", contentType);
 
     const data = await res.json();
     console.log("Fetched Data:", data);
