@@ -9,11 +9,8 @@ type Product = {
   name: string;
 };
 
-console.log(API_URL);
-
 async function getItems(categoryId: string) {
   try {
-    console.log(categoryId);
     const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
     console.log(res.url);
     if (!res.ok) {
