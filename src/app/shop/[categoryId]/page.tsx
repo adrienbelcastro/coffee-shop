@@ -42,6 +42,7 @@ export default async function Page({
   }
 
   try {
+    console.log(typeof categoryId);
     const productListData = await getItems(categoryId);
     if (!Array.isArray(productListData)) {
       throw new Error("Expected an array of products");
