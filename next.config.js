@@ -9,7 +9,7 @@ module.exports = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: "Response URL: https://coffee-shop-red-five.vercel.app",
+            value: "https://coffee-shop-red-five.vercel.app",
           },
           {
             key: "Access-Control-Allow-Methods",
