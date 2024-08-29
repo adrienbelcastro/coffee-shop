@@ -5,6 +5,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { categoryId: string } }
 ) {
+  console.log("Received request with categoryId:", params.categoryId);
   try {
     const categoryId = params.categoryId;
 
