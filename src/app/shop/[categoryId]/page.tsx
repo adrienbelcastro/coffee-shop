@@ -12,7 +12,9 @@ type Product = {
 async function getItems(categoryId: string) {
   try {
     const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
-    console.log(res.url);
+    console.log("Response URL:", res.url);
+    console.log("Response Status:", res.status);
+    console.log("Response Headers:", res.headers);
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
