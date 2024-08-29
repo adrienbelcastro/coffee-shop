@@ -17,7 +17,15 @@ async function getItems(categoryId: string) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
 
-    return await res.json();
+    // Check the content-type to ensure it's JSON
+    const contentType = res.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("Received non-JSON response");
+    }
+
+    const data = await res.json();
+    console.log("Fetched Data:", data);
+    return data;
   } catch (error) {
     console.error("Error in getItems:", error);
     return []; // Return an empty array or handle the error as needed
