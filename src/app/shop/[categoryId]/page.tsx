@@ -15,7 +15,7 @@ async function getItems(categoryId: string) {
   try {
     console.log(categoryId);
     const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
-    console.log(res);
+    console.log(res.url);
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
