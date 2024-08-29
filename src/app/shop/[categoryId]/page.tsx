@@ -12,6 +12,7 @@ type Product = {
 console.log(API_URL);
 
 async function getItems(categoryId: string) {
+  console.log(categoryId);
   const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
   console.log(res.status);
   try {
@@ -31,6 +32,7 @@ export default async function Page({
 }: {
   params: { categoryId: string };
 }) {
+  console.log(categoryId);
   if (!API_URL) {
     return <p>API Is Not Defined</p>;
   }
