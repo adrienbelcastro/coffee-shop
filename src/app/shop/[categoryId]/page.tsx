@@ -9,28 +9,28 @@ type Product = {
   name: string;
 };
 
-async function getItems(categoryId: string) {
-  const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
-  console.log(res.status);
-  try {
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error("Fetch error text:", errorText);
-      console.error("Response status:", res.status);
-      console.error("Response headers:", res.headers);
-      throw new Error(`Failed to fetch data: ${errorText}`);
-    }
+// async function getItems(categoryId: string) {
+//   const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
+//   console.log(res.status);
+//   try {
+//     if (!res.ok) {
+//       const errorText = await res.text();
+//       console.error("Fetch error text:", errorText);
+//       console.error("Response status:", res.status);
+//       console.error("Response headers:", res.headers);
+//       throw new Error(`Failed to fetch data: ${errorText}`);
+//     }
 
-    // Log the response before parsing
-    const data = await res.json();
-    console.log("Response data:", data);
+//     // Log the response before parsing
+//     const data = await res.json();
+//     console.log("Response data:", data);
 
-    return data;
-  } catch (error) {
-    console.error("Error in getItems:", error);
-    throw error; // Re-throw the error so it propagates to the caller
-  }
-}
+//     return data;
+//   } catch (error) {
+//     console.error("Error in getItems:", error);
+//     throw error; // Re-throw the error so it propagates to the caller
+//   }
+// }
 
 export default async function Page({
   params: { categoryId },
@@ -42,13 +42,13 @@ export default async function Page({
   }
 
   try {
-    console.log(typeof categoryId);
-    const productListData = await getItems(categoryId);
-    if (!Array.isArray(productListData)) {
-      throw new Error("Expected an array of products");
-    }
+    // console.log(typeof categoryId);
+    // const productListData = await getItems(categoryId);
+    // if (!Array.isArray(productListData)) {
+    //   throw new Error("Expected an array of products");
+    // }
 
-    console.log(productListData);
+    // console.log(productListData);
 
     return (
       <>
@@ -58,7 +58,7 @@ export default async function Page({
             <h3 className="text-center text-3xl font-light mx-0 my-4 py-4  border-b-2 border-black">
               Menu
             </h3>
-
+            {/* 
             <div className="grid grid-cols-2 gap-y-8 gap-x-64">
               {productListData.map((product: Product) => (
                 <Link
@@ -71,7 +71,7 @@ export default async function Page({
                   </div>
                 </Link>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
         <Footer />
