@@ -7,7 +7,10 @@ module.exports = {
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
-          { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "Response URL: https://coffee-shop-red-five.vercel.app",
+          }, // replace this your actual origin
           {
             key: "Access-Control-Allow-Methods",
             value: "GET,DELETE,PATCH,POST,PUT",
