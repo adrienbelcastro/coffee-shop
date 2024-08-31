@@ -24,7 +24,10 @@ interface OptionWithChoices {
 }
 
 async function fetchProducts(categoryId: string, id: string) {
-  const res = await fetch(`${API_URL}/api/shop/${categoryId}/${id}`);
+  const res = await fetch(`${API_URL}/api/shop/${categoryId}/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
