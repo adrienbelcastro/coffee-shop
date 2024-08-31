@@ -13,10 +13,12 @@ async function getItems(categoryId: string) {
   console.log(categoryId, typeof categoryId);
   console.log(API_URL);
   try {
-    const res = await fetch(`${API_URL}/api/shop/${categoryId}`);
-    console.log("Response URL:", res.url);
-    console.log("Response Status:", res.status);
-    console.log("Response Headers:", res.headers);
+    const res = await fetch(`${API_URL}/api/shop/${categoryId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    console.log(res);
+
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
@@ -25,7 +27,8 @@ async function getItems(categoryId: string) {
     const contentType = res.headers.get("content-type");
     console.log("Response Content-Type:", contentType);
 
-    const data = await res.json();
+    // const data = await res.json();
+    const data = JSON.parse(res);
     console.log("Fetched Data:", data);
     return data;
   } catch (error) {
