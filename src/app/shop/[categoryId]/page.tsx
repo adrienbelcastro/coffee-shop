@@ -28,7 +28,7 @@ async function getItems(categoryId: string) {
     console.log("Response Content-Type:", contentType);
 
     // const data = await res.json();
-    const data = JSON.parse(res);
+    const data = await res.json();
     console.log("Fetched Data:", data);
     return data;
   } catch (error) {
