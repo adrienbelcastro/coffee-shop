@@ -17,7 +17,7 @@ async function getData() {
       throw new Error("Failed to fetch data");
     }
 
-    return result.json();
+    return await result.json();
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
