@@ -10,30 +10,22 @@ type Product = {
 };
 
 async function getItems(categoryId: string) {
-  console.log(categoryId, typeof categoryId);
-  console.log(API_URL);
   try {
     const res = await fetch(`${API_URL}/api/shop/${categoryId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
-    console.log(res);
 
     if (!res.ok) {
       throw new Error(`Failed to fetch data: ${res.statusText}`);
     }
 
-    // Check the content-type to ensure it's JSON
-    const contentType = res.headers.get("content-type");
-    console.log("Response Content-Type:", contentType);
+    const data = await res.json();
 
-    // const data = await res.json();
-    const data = JSON.parse(res);
-    console.log("Fetched Data:", data);
     return data;
   } catch (error) {
     console.error("Error in getItems:", error);
-    return []; // Return an empty array or handle the error as needed
+    return [];
   }
 }
 
@@ -48,7 +40,6 @@ export default async function Page({
   }
 
   const productListData = await getItems(categoryId);
-  console.log(productListData);
 
   return (
     <>

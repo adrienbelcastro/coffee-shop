@@ -11,7 +11,10 @@ interface Category {
 
 async function getData() {
   try {
-    const result = await fetch(`${API_URL}/api/shop`);
+    const result = await fetch(`${API_URL}/api/shop`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
 
     if (!result) {
       throw new Error("Failed to fetch data");
@@ -30,7 +33,6 @@ export default async function Page() {
   }
 
   const data = await getData();
-  console.log(data);
 
   return (
     <>
