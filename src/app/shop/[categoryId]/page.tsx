@@ -45,6 +45,7 @@ export default async function Page({
   }
 
   const productListData = await getItems(categoryId);
+  console.log(productListData);
 
   return (
     <>
