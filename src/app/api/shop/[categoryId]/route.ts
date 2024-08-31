@@ -16,11 +16,13 @@ export async function GET(
       );
     }
 
+    console.log("Category ID Type:", typeof categoryId);
+
     const supabase = initSupabase();
     const { data, error } = await supabase
       .from("products")
       .select("*")
-      .eq("category_id", categoryId);
+      .eq("category_id", parseInt(categoryId, 10));
 
     if (error) {
       console.error("Error fetching products:", error.message);
