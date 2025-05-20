@@ -35,6 +35,9 @@ const Header = () => {
                   <h3 className="px-5 text-xl">SHOP NOW</h3>
                 </Link>
               </li>
+              <Link href="/login">
+                <h3 className="px-5 text-xl">Login</h3>
+              </Link>
             </ul>
           </div>
         </div>
